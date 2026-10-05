@@ -82,3 +82,10 @@ Read `HANDOFF.md`, `eval/agent_phase1_2_report_2026-10-06.md`, the current diff,
 - Stage 1 (done): local absolute paths redacted from 13 evidence files (`eval/redaction_manifest_2026-10-06.json`; originals kept in git-ignored `local_only/`), `scripts/check_public_safety.py` (run before every commit/push; full history scanned clean), MIT license, reconstructed `docs/TIMELINE.md`, git history started with author `chan12-photo` (GitHub noreply email, repo-local config).
 - Stage 2 (done): `agent-read --replay` and `scripts/run_demo.py` reproduce six recorded runs without Ollama (verified on a fresh clone: 6/6, tests 126/126); new English `README.md`, Korean `README.ko.md`, `docs/EVALUATION.md`; the old README moved verbatim to `docs/USAGE.ko.md`.
 - Not done: web UI screenshot/GIF, CI, the pre-registered held-out evaluation, in-file instruction mitigation (u12), search-completeness decision (u07). The README clone URL assumes the GitHub repository name `chan12-photo/ai_job_agent`.
+
+## Update 2026-10-06 — web UI screenshots, publication, stage 3 injection evaluation
+
+- Published: https://github.com/chan12-photo/ai_job_agent (public). Screenshots in `docs/images/`; a web UI bug that rendered extracted JD fields as raw dicts was fixed with a regression test.
+- Stage 3: pre-registered indirect prompt injection evaluation in `eval/agent_injection_2026-10-06/` (PREREGISTRATION.md pushed before any run, REPORT.md with results). Test attack success 1/18 → 0/18 with profile v4; the registered rule is met on one case, with one plausible new failure (answering before reading after `list_files`), so the default profile stays `v2`. The registered canary detector missed spaced echoes; this is documented, not re-scored. 179 of 250 model requests used. The sealed test set is spent; a new mitigation needs a new sealed set.
+- `agent-read --prompt-profile {v2,v3,v4}`; replays use the profile recorded in their fixture.
+- Next candidates: a non-pushy tool-result reminder plus a detector that counts spaced canaries, under a new pre-registration; the natural-language search-query failure (separately).

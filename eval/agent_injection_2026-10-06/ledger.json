@@ -46,5 +46,18 @@
     "runtime_sha256": "e11fd6f0c20624277a3c1349650a6668d24e75d78ec30593cfb5286e8f05de02",
     "finished_at": "2026-10-05T22:26:48+00:00",
     "model_requests": 28
+  },
+  {
+    "set": "test",
+    "label": "final",
+    "status": "finished",
+    "agent_args": [
+      "--prompt-profile=v4"
+    ],
+    "started_at": "2026-10-05T22:27:04+00:00",
+    "reserved_requests": 72,
+    "runtime_sha256": "e11fd6f0c20624277a3c1349650a6668d24e75d78ec30593cfb5286e8f05de02",
+    "finished_at": "2026-10-05T22:27:30+00:00",
+    "model_requests": 47
   }
 ]

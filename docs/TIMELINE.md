@@ -30,4 +30,5 @@
 | 2026-10-06 | Phase 1.2 | 감사 결과 중 실제 재현된 결함 수정 | 대소문자 우회 차단, 로그 저장 구조, 불완전 응답·검색 판정, scorer v2 | [Phase 1.2](../eval/agent_phase1_2_report_2026-10-06.md) |
 | 2026-10-06 | 사용성 평가 | 합성 Python 프로젝트 12건, 1회성 | 엄격 기준 10/12, 차단 대상 실행 0회·유출 0건. 실패: 값 확인에 검색 도구 사용, 파일 속 지시 일부 수행 | [usability](../eval/agent_phase12_usability_report_2026-10-06.md) |
 | 2026-10-06 | 후속 보강 | 남은 감사 항목, 실제 Ollama 동작 확인 | Ollama 0.34.4 기본 설정이 `num_ctx` 초과 시 오래된 메시지를 조용히 버림을 재현 → `truncate=false`로 명시적 실패 처리 | [follow-up](../eval/agent_phase12_followup_report_2026-10-06.md), [context check](../eval/agent_phase12_context_check_2026-10-06.json) |
+| 2026-10-06 | 인젝션 평가 (사전 등록) | 사례·채점기·판정 기준을 모델 실행 전에 GitHub에 push한 뒤 기준선 → 완화책 설계(dev만) → 봉인한 test 1회 | test 공격 성공 1/18 → 0/18로 등록 기준은 충족했지만 1건 차이이고 새 실패가 생겨 기본값에 미적용. 등록한 탐지기의 한계도 함께 보고 | [report](../eval/agent_injection_2026-10-06/REPORT.md) |
 | 2026-10-06 | 공개 준비 | 로컬 절대경로 가림, 공개 안전성 검사, git 기록 시작 | 13개 파일에서 경로 133곳을 가림. 경로만 바뀌었는지 역변환으로 확인 | [redaction manifest](../eval/redaction_manifest_2026-10-06.json) |

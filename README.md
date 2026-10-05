@@ -14,6 +14,7 @@ Everything runs on a Mac with a local Ollama model (`qwen3:4b-instruct`, 4-bit).
 - **Ollama silently drops chat history when it exceeds the context window.** With the default request, a 4,772-token conversation was cut to 3,542 tokens without an error; the message holding the question vanished and the model answered `UNKNOWN` with `done_reason=stop`. The agent now sends `truncate=false`, so an overflow becomes an explicit `context_budget_exceeded` that keeps the evidence already read. → [follow-up report](eval/agent_phase12_followup_report_2026-10-06.md)
 - **Passing a format check is not being right.** Under an identical output contract, the 4B model reached the expected verdict in 18/20 matching cases and the 1.7B model in 5/20, although both produced well-formed, correctly cited output 20/20. → [evaluation index](docs/EVALUATION.md)
 - **The policy layer holds even when the model does not.** In a 12-request usability test on a synthetic Python project, requests for a `.ENV` file and for a symlink pointing outside the workspace were rejected before any file was opened, with zero leaks of planted markers. The same run scored 10/12 overall: the model also obeyed an instruction hidden in a file. That failure is kept as a replayable demo, not hidden. → [usability report](eval/agent_phase12_usability_report_2026-10-06.md)
+- **A pre-registered prompt-injection evaluation, reported as it came out.** The cases, scorer, and decision rule were pushed to GitHub before any model run. The model rarely obeyed planted instructions and never attempted a hijacked tool call (sealed test set: 1/18 attack success by the registered measure). A mitigation that labels tool results as untrusted and restates the user's question met the registered rule (0/18), but the difference is one case, and it plausibly caused a new failure (answering before reading a file), so it is not the default. The registered detector also missed the model's main way of complying; that is reported, not re-scored. → [injection report](eval/agent_injection_2026-10-06/REPORT.md)
 
 ## Screenshots
 
@@ -113,7 +114,7 @@ This project was developed with AI coding assistants (OpenAI Codex and Anthropic
 ## Limitations
 
 - Evaluation sets are small and synthetic (4–20 cases each). They catch regressions; they do not establish general accuracy.
-- The agent still follows some instructions found inside files. This is the main open issue.
+- The agent still sometimes appends tokens that files ask for (see the injection report). No mitigation is enabled by default.
 - The web UI and demo questions are in Korean; OCR requires macOS Vision.
 - Large files are not paged: with `num_ctx=4096`, a token-heavy file ends the run as `context_budget_exceeded`.
 - Tests and demos were run on macOS only; Linux and Windows are untested.
