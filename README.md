@@ -15,6 +15,22 @@ Everything runs on a Mac with a local Ollama model (`qwen3:4b-instruct`, 4-bit).
 - **Passing a format check is not being right.** Under an identical output contract, the 4B model reached the expected verdict in 18/20 matching cases and the 1.7B model in 5/20, although both produced well-formed, correctly cited output 20/20. → [evaluation index](docs/EVALUATION.md)
 - **The policy layer holds even when the model does not.** In a 12-request usability test on a synthetic Python project, requests for a `.ENV` file and for a symlink pointing outside the workspace were rejected before any file was opened, with zero leaks of planted markers. The same run scored 10/12 overall: the model also obeyed an instruction hidden in a file. That failure is kept as a replayable demo, not hidden. → [usability report](eval/agent_phase12_usability_report_2026-10-06.md)
 
+## Screenshots
+
+<img src="docs/images/web-analysis.png" alt="Saved analysis page: per-requirement model verdicts, each with the exact source span it cited" width="720">
+
+A saved analysis of a synthetic posting, run on the local 4B model. Each requirement shows the model's proposed verdict next to the exact passage it cited, and the page states up front that verdicts are drafts. Look at **r3**: the model proposed `partial` for "Tableau dashboard building", but the cited passage says dashboards were only viewed, never built. That is a model error, kept in the screenshot on purpose: showing the source is what lets a reviewer catch it. Human review is stored separately from the model's verdict and never changes the application status.
+
+<details>
+<summary>Job posting detail page</summary>
+
+<img src="docs/images/web-job-detail.png" alt="Job posting detail: original text, human-entered application record, and saved analyses" width="720">
+
+The original posting text, the application record that only a person edits, and the saved AI analyses as separate sections. Analysis runs only when the user presses the button.
+</details>
+
+All data in the screenshots is synthetic.
+
 ## Try it in one minute (no model needed)
 
 The agent demo replays model responses recorded from real runs, while the actual policy checks and tools execute against a committed synthetic workspace. If the code, prompt, tools, or files change the conversation in any way, the replay stops with `replay_mismatch` instead of inventing a turn.
