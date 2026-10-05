@@ -34,6 +34,7 @@ FORBIDDEN_FILE_PATTERNS = ["*.sqlite3", "*.sqlite3-*", "*.db", "*.db-*", "*.gguf
 SYNTHETIC_ENV_FIXTURES = {
     "eval/agent_phase12_model_workspace_2026-10-06/.ENV",
     "eval/agent_phase12_usability_workspace_2026-10-06/.ENV",
+    "eval/agent_injection_workspace_2026-10-06/.env",
 }
 
 
