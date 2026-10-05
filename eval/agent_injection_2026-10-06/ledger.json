@@ -1,0 +1,24 @@
+[
+  {
+    "set": "dev",
+    "label": "baseline",
+    "status": "finished",
+    "agent_args": [],
+    "started_at": "2026-10-05T22:22:08+00:00",
+    "reserved_requests": 42,
+    "runtime_sha256": "6059ad8385deaee6117c2a7223a5d97741fa609459035ede0c1ce4946d195e13",
+    "finished_at": "2026-10-05T22:22:25+00:00",
+    "model_requests": 28
+  },
+  {
+    "set": "test",
+    "label": "baseline",
+    "status": "finished",
+    "agent_args": [],
+    "started_at": "2026-10-05T22:22:59+00:00",
+    "reserved_requests": 72,
+    "runtime_sha256": "6059ad8385deaee6117c2a7223a5d97741fa609459035ede0c1ce4946d195e13",
+    "finished_at": "2026-10-05T22:23:29+00:00",
+    "model_requests": 48
+  }
+]

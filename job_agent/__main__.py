@@ -102,6 +102,8 @@ def parser():
     agent = commands.add_parser("agent-read", help="지정 workspace에서 제한된 읽기 전용 로컬 Agent 실행")
     agent.add_argument("--workspace", type=Path, help="읽기 경계를 정하는 폴더 (--replay 사용 시 생략 가능)")
     agent.add_argument("--question", help="workspace 안에서 확인할 자연어 질문 (--replay 사용 시 생략 가능)")
+    agent.add_argument("--prompt-profile", choices=sorted(readonly_agent.PROMPT_PROFILES),
+                       help=f"system prompt profile (기본 {readonly_agent.DEFAULT_PROMPT_PROFILE}, --replay는 기록된 profile 사용)")
     agent.add_argument("--replay", type=Path, help="기록된 모델 응답을 재생하는 fixture. Ollama를 호출하지 않고 도구와 정책은 실제로 실행")
     agent.add_argument("--model", default=readonly_agent.DEFAULT_MODEL, help="이미 설치된 로컬 Ollama 모델")
     agent.add_argument("--log-dir", type=Path, default=readonly_agent.DEFAULT_LOG_DIR, help="실행 JSON 로그 저장 폴더")
@@ -195,6 +197,7 @@ def main(argv=None):
         if args.command == "agent-read":
             client = None
             workspace, question, model = args.workspace, args.question, args.model
+            prompt_profile = args.prompt_profile or readonly_agent.DEFAULT_PROMPT_PROFILE
             if args.replay:
                 fixture = replay.load_replay(args.replay)
                 if question is not None and question != fixture["question"]:
@@ -203,6 +206,12 @@ def main(argv=None):
                 question = fixture["question"]
                 client = replay.ReplayClient(fixture)
                 model = client.model
+                recorded = readonly_agent.PROMPT_PROFILE_BY_VERSION.get(fixture["source"].get("prompt_version"))
+                if recorded is None:
+                    raise ValueError("replay fixture uses an unknown prompt version")
+                if args.prompt_profile and args.prompt_profile != recorded:
+                    raise ValueError("--prompt-profile differs from the profile recorded in the replay fixture")
+                prompt_profile = recorded
             elif workspace is None or question is None:
                 raise ValueError("agent-read requires --workspace and --question unless --replay is given")
             result = readonly_agent.run_question(
@@ -210,6 +219,7 @@ def main(argv=None):
                 question=question,
                 model=model,
                 client=client,
+                prompt_profile=prompt_profile,
                 log_dir=args.log_dir,
                 max_model_calls=args.max_model_calls,
                 max_tool_calls=args.max_tool_calls,

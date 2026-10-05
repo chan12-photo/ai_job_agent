@@ -29,6 +29,7 @@ def run_fixture(path: Path, log_dir: Path) -> dict:
         model=fixture["model_metadata"].get("model", readonly_agent.DEFAULT_MODEL),
         log_dir=log_dir,
         client=replay.ReplayClient(fixture),
+        prompt_profile=readonly_agent.PROMPT_PROFILE_BY_VERSION[fixture["source"]["prompt_version"]],
     )
     source = fixture["source"]
     return {
