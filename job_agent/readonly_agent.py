@@ -91,6 +91,10 @@ class AgentTimeout(AgentError):
     pass
 
 
+class ReplayMismatch(llm.LocalModelError):
+    """A replayed run built a different conversation than the recorded one."""
+
+
 class ContextLimitError(llm.LocalModelError):
     """Ollama rejected a chat request because the prompt exceeds num_ctx."""
 
@@ -127,6 +131,7 @@ STATUS_EXIT_CODES = {
     "timed_out": 124,
     "cancelled": 130,
     "ollama_error": 1,
+    "replay_mismatch": 1,
     "log_write_failed": 1,
 }
 
@@ -1153,6 +1158,14 @@ def run_question(
                     model_turn = len([step for step in steps if step.get("kind") == "model"]) + 1
                     steps.append({"kind": "model", "model_turn": model_turn, "completion": completion_view(failed_completion), "error": failed_completion.get("error")})
                 break
+            except ReplayMismatch as exc:
+                status = "replay_mismatch"
+                failure_reason = str(exc)
+                failed_completion = getattr(client, "last_failed_completion", None)
+                if failed_completion:
+                    model_turn = len([step for step in steps if step.get("kind") == "model"]) + 1
+                    steps.append({"kind": "model", "model_turn": model_turn, "completion": completion_view(failed_completion), "error": failed_completion.get("error")})
+                break
             except llm.ModelTimeout as exc:
                 status = "timed_out"
                 failure_reason = str(exc)
@@ -1422,6 +1435,10 @@ def print_result(record: dict[str, Any], *, as_json: bool = False) -> None:
     if record.get("log_error"):
         print(f"로그 오류: {record['log_error']}")
     print(f"모델: {(record.get('model_metadata') or {}).get('model') or '미확인'}")
+    replay_info = (record.get("model_metadata") or {}).get("replay")
+    if replay_info:
+        recorded = replay_info.get("recorded_from") or {}
+        print(f"재생 모드: {replay_info.get('fixture')} — 모델은 호출하지 않고 {recorded.get('started_at')} 기록 응답을 사용, 도구·정책은 실제 실행")
     print("\n모델 답변:")
     print(record.get("final_answer") or "(최종 답변 없음)")
     print("\n실제 조회 근거:")
