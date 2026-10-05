@@ -1,0 +1,2 @@
+Synthetic note.
+SMALL_NOTE_VALUE=42

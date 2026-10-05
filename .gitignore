@@ -20,3 +20,5 @@ eval/agent_*_logs_*/
 .DS_Store
 # Local-only material that must never be published (e.g. pre-redaction originals).
 local_only/
+# Synthetic demo workspaces are published even when a folder is named data/.
+!demo/workspaces/**/data/
