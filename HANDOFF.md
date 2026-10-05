@@ -75,3 +75,10 @@ Read `HANDOFF.md`, `eval/agent_phase1_2_report_2026-10-06.md`, the current diff,
 - Tests: 117/117. The 7 new runtime regression tests fail on the pre-fix runtime copy.
 - Still open (user decision): in-file instruction following (usability u12), whether policy-skipped files should make searches incomplete (u07). Large-file paging is not implemented; token-heavy files end as `context_budget_exceeded`.
 - Next single recommended task: decide the u07 search-completeness rule, then measure in-file instruction handling on a fresh fixed case set before any write/shell discussion.
+
+## Update 2026-10-06 — portfolio preparation (stages 1–2)
+
+- Target: public GitHub portfolio for LLM application/evaluation engineering (backend secondary), Korean and English, one repository framed as "local LLM tools that have to show their evidence".
+- Stage 1 (done): local absolute paths redacted from 13 evidence files (`eval/redaction_manifest_2026-10-06.json`; originals kept in git-ignored `local_only/`), `scripts/check_public_safety.py` (run before every commit/push; full history scanned clean), MIT license, reconstructed `docs/TIMELINE.md`, git history started with author `chan12-photo` (GitHub noreply email, repo-local config).
+- Stage 2 (done): `agent-read --replay` and `scripts/run_demo.py` reproduce six recorded runs without Ollama (verified on a fresh clone: 6/6, tests 126/126); new English `README.md`, Korean `README.ko.md`, `docs/EVALUATION.md`; the old README moved verbatim to `docs/USAGE.ko.md`.
+- Not done: web UI screenshot/GIF, CI, the pre-registered held-out evaluation, in-file instruction mitigation (u12), search-completeness decision (u07). The README clone URL assumes the GitHub repository name `chan12-photo/ai_job_agent`.
