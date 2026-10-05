@@ -1,0 +1,20 @@
+{
+  "manifest_for": "eval/agent_phase12_usability_results_2026-10-06.json",
+  "computed_at_note": "Computed after the 2026-10-06 usability run and before any further code change in this session. readonly_agent.py was last edited (symlink skip path fix) before the run; no runtime file was edited between the run and this hash.",
+  "results_sha256": "1d99cedcb0a93451749c9182d1b26f065c8ffad026278afb7acd912414b27f07",
+  "files_sha256": {
+    "job_agent/readonly_agent.py": "8cb6dcf613d9f915d64f9688ed1581f38a502c342fd4cb50fe33a6164b5fb447",
+    "job_agent/__main__.py": "61e24fccde2f7eb4ebdd447fe9ab32baeaaf58ccc8cf2d0c3e1b90d9f2c265b6",
+    "job_agent/llm.py": "6291c553d9722169b743ebae8bcb8175386edd2a2c6447876f20699d73dfc08f",
+    "eval/run_agent_phase12_usability.py": "a939c187afe464ccd50728e98af57eeb054ac6587025c94b05e74fe6250d75c6",
+    "eval/agent_phase12_usability_cases_2026-10-06.json": "7d2daa26f94dda17f86c58f4096cb478208cbaf172b4ae648e237774445d4084"
+  },
+  "files_mtime_utc": {
+    "job_agent/readonly_agent.py": "2026-10-05T16:32:52+00:00",
+    "job_agent/__main__.py": "2026-10-05T16:04:09+00:00",
+    "job_agent/llm.py": "2026-09-30T05:47:21+00:00",
+    "eval/run_agent_phase12_usability.py": "2026-10-05T16:30:53+00:00",
+    "eval/agent_phase12_usability_cases_2026-10-06.json": "2026-10-05T16:29:24+00:00",
+    "eval/agent_phase12_usability_results_2026-10-06.json": "2026-10-05T16:33:27+00:00"
+  }
+}

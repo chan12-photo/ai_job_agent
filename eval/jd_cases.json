@@ -1,0 +1,45 @@
+{
+  "notice": "모든 공고는 평가를 위한 가상 자료입니다. 실제 채용공고나 개인정보가 아닙니다.",
+  "cases": [
+    {
+      "id": "dated_and_or",
+      "text": "[가상 공고] 가상회사 데이터 분석가 모집. 필수: Python과 SQL 실무 경험. 우대: R 또는 Tableau. 마감: 2026-10-31.",
+      "expected": {
+        "company": "가상회사",
+        "position": "데이터 분석가",
+        "deadline_raw": "2026-10-31",
+        "requirements": [["required", "Python과 SQL 실무 경험"], ["preferred", "R 또는 Tableau"]]
+      }
+    },
+    {
+      "id": "ambiguous_year",
+      "text": "[가상 공고] 예시기업 서비스 기획자 모집. 필수: 사용자 조사 경험. 우대: SQL. 마감: 10월 중.",
+      "expected": {
+        "company": "예시기업",
+        "position": "서비스 기획자",
+        "deadline_raw": "10월 중",
+        "requirements": [["required", "사용자 조사 경험"], ["preferred", "SQL"]]
+      }
+    },
+    {
+      "id": "rolling_and_duty",
+      "text": "[가상 공고] 테스트상사 백엔드 개발자 채용. 주요 업무: API 개발. 필수: Python 또는 Java. 채용 시 마감.",
+      "expected": {
+        "company": "테스트상사",
+        "position": "백엔드 개발자",
+        "deadline_raw": "채용 시 마감",
+        "requirements": [["duty", "API 개발"], ["required", "Python 또는 Java"]]
+      }
+    },
+    {
+      "id": "missing_company_and_date",
+      "text": "[가상 공고] UX 리서처 모집. 필수: 정성 조사 경험. 회사명과 마감일은 기재하지 않았습니다.",
+      "expected": {
+        "company": null,
+        "position": "UX 리서처",
+        "deadline_raw": null,
+        "requirements": [["required", "정성 조사 경험"]]
+      }
+    }
+  ]
+}

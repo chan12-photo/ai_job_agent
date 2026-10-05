@@ -1,0 +1,272 @@
+{
+  "fixture_version": "phase06b-generalization-fixture-v1",
+  "note": "Additional synthetic evaluation informed by the Phase 0.6-A basic6 failure mode. This is not an independent external benchmark.",
+  "directories": [
+    "archive",
+    "docs/policies",
+    "docs/reports",
+    "settings",
+    "src"
+  ],
+  "files": [
+    {
+      "path": "README-alpha.md",
+      "text": "# Alpha Workspace\n\nSynthetic data for Phase 0.6-B only.\n"
+    },
+    {
+      "path": "docs/brief.md",
+      "text": "# Project Orion Brief\n\nProject Orion is an offline hiring assistant prototype. It stores sample notes locally and never sends data to external services.\n"
+    },
+    {
+      "path": "docs/policies/privacy.md",
+      "text": "# Privacy Policy\n\nSynthetic privacy policy for local tests.\n"
+    },
+    {
+      "path": "docs/policies/security.md",
+      "text": "# Security Policy\n\nSynthetic security policy for local tests.\n"
+    },
+    {
+      "path": "docs/reports/q1.md",
+      "text": "# Q1 Report\n\nThe docs report includes SHIFT_CODE for the scoped directory search.\nALPHA_PIN appears here as an out-of-scope marker for file search.\n"
+    },
+    {
+      "path": "docs/reports/q2.md",
+      "text": "# Q2 Report\n\nORBIT_NOTE appears in the report archive.\n"
+    },
+    {
+      "path": "settings/flags.json",
+      "text": "{\"beta\": false, \"region\": \"sandbox\", \"limit\": 7}\n"
+    },
+    {
+      "path": "src/parser.py",
+      "text": "def parse_item(value):\n    # ALPHA_PIN: parser-only marker\n    # SHIFT_CODE appears here outside docs/reports\n    return value.strip()\n"
+    },
+    {
+      "path": "src/worker.py",
+      "text": "def work():\n    marker = 'ORBIT_NOTE'\n    outside = 'VANISHING_TOKEN_77'\n    return marker\n"
+    }
+  ],
+  "cases": [
+    {
+      "id": "gen_01_list_root",
+      "request": "작업공간 최상위 항목만 이름으로 확인해줘.",
+      "expected_tool": "list_files",
+      "expected_args": {
+        "path": "."
+      },
+      "expected_evidence": {
+        "type": "list_entries",
+        "entries": [
+          "README-alpha.md",
+          "archive",
+          "docs",
+          "settings",
+          "src"
+        ]
+      },
+      "answer_criteria": {
+        "must_include": [
+          "README-alpha.md",
+          "docs",
+          "settings",
+          "src"
+        ],
+        "must_exclude": [
+          "README.md",
+          "large.txt"
+        ]
+      }
+    },
+    {
+      "id": "gen_02_list_nested",
+      "request": "docs/policies 폴더 안에 뭐가 있는지 목록만 보여줘.",
+      "expected_tool": "list_files",
+      "expected_args": {
+        "path": "docs/policies"
+      },
+      "expected_evidence": {
+        "type": "list_entries",
+        "entries": [
+          "docs/policies/privacy.md",
+          "docs/policies/security.md"
+        ]
+      },
+      "answer_criteria": {
+        "must_include": [
+          "privacy.md",
+          "security.md"
+        ],
+        "must_exclude": [
+          "q1.md",
+          "parser.py"
+        ]
+      }
+    },
+    {
+      "id": "gen_03_read_brief_summary",
+      "request": "docs/brief.md를 읽고 핵심 사실을 한 문장으로 요약해줘.",
+      "expected_tool": "read_file",
+      "expected_args": {
+        "path": "docs/brief.md"
+      },
+      "expected_evidence": {
+        "type": "read_contains",
+        "contains": [
+          "Project Orion",
+          "offline hiring assistant prototype",
+          "never sends data to external services"
+        ]
+      },
+      "answer_criteria": {
+        "must_include": [
+          "Project Orion"
+        ],
+        "must_include_any": [
+          [
+            "offline",
+            "오프라인"
+          ],
+          [
+            "external",
+            "외부"
+          ]
+        ],
+        "must_exclude": [
+          "paid API",
+          "customer data",
+          "production",
+          "cloud backup"
+        ]
+      }
+    },
+    {
+      "id": "gen_04_read_flag_false",
+      "request": "settings/flags.json에서 beta 값만 확인해줘.",
+      "expected_tool": "read_file",
+      "expected_args": {
+        "path": "settings/flags.json"
+      },
+      "expected_evidence": {
+        "type": "json_value",
+        "key": "beta",
+        "value": false
+      },
+      "answer_criteria": {
+        "must_include": [
+          "false"
+        ],
+        "must_exclude": [
+          "true"
+        ]
+      }
+    },
+    {
+      "id": "gen_05_search_file_alpha",
+      "request": "src/parser.py 파일에서 ALPHA_PIN을 찾아줘.",
+      "expected_tool": "search_text",
+      "expected_args": {
+        "query": "ALPHA_PIN",
+        "path": "src/parser.py"
+      },
+      "expected_evidence": {
+        "type": "search_matches",
+        "matches": [
+          {
+            "path": "src/parser.py",
+            "text_contains": "ALPHA_PIN"
+          }
+        ]
+      },
+      "answer_criteria": {
+        "must_include": [
+          "ALPHA_PIN",
+          "src/parser.py"
+        ],
+        "must_exclude": [
+          "docs/reports/q1.md"
+        ]
+      }
+    },
+    {
+      "id": "gen_06_search_dir_shift",
+      "request": "docs/reports 디렉터리에서 SHIFT_CODE를 검색해줘.",
+      "expected_tool": "search_text",
+      "expected_args": {
+        "query": "SHIFT_CODE",
+        "path": "docs/reports"
+      },
+      "expected_evidence": {
+        "type": "search_matches",
+        "matches": [
+          {
+            "path": "docs/reports/q1.md",
+            "text_contains": "SHIFT_CODE"
+          }
+        ]
+      },
+      "answer_criteria": {
+        "must_include": [
+          "SHIFT_CODE",
+          "docs/reports/q1.md"
+        ],
+        "must_exclude": [
+          "src/parser.py"
+        ]
+      }
+    },
+    {
+      "id": "gen_07_search_workspace_orbit",
+      "request": "전체 workspace에서 ORBIT_NOTE를 검색해줘.",
+      "expected_tool": "search_text",
+      "expected_args": {
+        "query": "ORBIT_NOTE",
+        "path": "."
+      },
+      "expected_evidence": {
+        "type": "search_matches",
+        "matches": [
+          {
+            "path": "docs/reports/q2.md",
+            "text_contains": "ORBIT_NOTE"
+          },
+          {
+            "path": "src/worker.py",
+            "text_contains": "ORBIT_NOTE"
+          }
+        ]
+      },
+      "answer_criteria": {
+        "must_include": [
+          "ORBIT_NOTE",
+          "docs/reports/q2.md",
+          "src/worker.py"
+        ],
+        "must_exclude": [
+          "TODO"
+        ]
+      }
+    },
+    {
+      "id": "gen_08_search_no_match_policy",
+      "request": "docs/policies 안에서 VANISHING_TOKEN_77을 찾아줘.",
+      "expected_tool": "search_text",
+      "expected_args": {
+        "query": "VANISHING_TOKEN_77",
+        "path": "docs/policies"
+      },
+      "expected_evidence": {
+        "type": "search_no_matches",
+        "min_searched_files": 2
+      },
+      "answer_criteria": {
+        "must_include": [
+          "VANISHING_TOKEN_77"
+        ],
+        "must_indicate_no_match": true,
+        "must_exclude": [
+          "src/worker.py"
+        ]
+      }
+    }
+  ]
+}

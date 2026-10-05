@@ -1,0 +1,521 @@
+{
+  "rescore_version": "phase1-demo-scorer-v2-offline-2026-10-06",
+  "note": "Existing result files are preserved; this file only re-scores saved synthetic Phase 1 demo outputs.",
+  "inputs": [
+    {
+      "path": "eval/agent_phase1_cli_demo_results_rerun_2026-10-05.json",
+      "old_summary": {
+        "case_count": 6,
+        "passed": 5,
+        "completed": 5,
+        "tool_sequence_matched": 5,
+        "facts_matched": 5,
+        "model_generation_attempts": 12,
+        "model_generation_responses": 12,
+        "prompt_tokens": 13768,
+        "output_tokens": 422,
+        "agent_elapsed_ms": 8064.705
+      },
+      "new_summary": {
+        "case_count": 6,
+        "passed": 5,
+        "completed": 5,
+        "tool_sequence_matched": 5,
+        "facts_matched": 5
+      },
+      "cases": [
+        {
+          "case_id": "demo_01_list_root",
+          "old_passed": true,
+          "new_passed": true,
+          "status": "completed",
+          "actual_tools": [
+            "list_files"
+          ],
+          "expected_tools": [
+            "list_files"
+          ],
+          "new_facts_check": {
+            "passed": true,
+            "checks": [
+              {
+                "name": "entry:README.md",
+                "passed": true,
+                "detail": "entries=['README.md', 'docs', 'reports', 'settings', 'src']"
+              },
+              {
+                "name": "entry:docs",
+                "passed": true,
+                "detail": "entries=['README.md', 'docs', 'reports', 'settings', 'src']"
+              },
+              {
+                "name": "entry:reports",
+                "passed": true,
+                "detail": "entries=['README.md', 'docs', 'reports', 'settings', 'src']"
+              },
+              {
+                "name": "entry:settings",
+                "passed": true,
+                "detail": "entries=['README.md', 'docs', 'reports', 'settings', 'src']"
+              },
+              {
+                "name": "entry:src",
+                "passed": true,
+                "detail": "entries=['README.md', 'docs', 'reports', 'settings', 'src']"
+              }
+            ],
+            "missing": [],
+            "tool_argument_summary": []
+          }
+        },
+        {
+          "case_id": "demo_02_read_value",
+          "old_passed": true,
+          "new_passed": true,
+          "status": "completed",
+          "actual_tools": [
+            "read_file"
+          ],
+          "expected_tools": [
+            "read_file"
+          ],
+          "new_facts_check": {
+            "passed": true,
+            "checks": [
+              {
+                "name": "read_enabled_false",
+                "passed": true,
+                "detail": "{\"enabled\": false, \"mode\": \"demo\", \"limit\": 3}\n"
+              },
+              {
+                "name": "answer_says_false",
+                "passed": true,
+                "detail": "settings/app.json 파일에서 enabled 값은 false입니다. [E1]"
+              }
+            ],
+            "missing": [],
+            "tool_argument_summary": []
+          }
+        },
+        {
+          "case_id": "demo_03_search_file",
+          "old_passed": true,
+          "new_passed": true,
+          "status": "completed",
+          "actual_tools": [
+            "search_text"
+          ],
+          "expected_tools": [
+            "search_text"
+          ],
+          "new_facts_check": {
+            "passed": true,
+            "checks": [
+              {
+                "name": "search_found_code_red_in_file",
+                "passed": true,
+                "detail": "[{'path': 'src/report.py', 'line': 2, 'text': '    marker = \"CODE_RED\"'}]"
+              },
+              {
+                "name": "answer_mentions_code_red",
+                "passed": true,
+                "detail": "src/report.py 파일에서 \"CODE_RED\"는 다음 위치에 존재합니다:  \n라인 2: `marker = \"CODE_RED\"` [E1]"
+              }
+            ],
+            "missing": [],
+            "tool_argument_summary": []
+          }
+        },
+        {
+          "case_id": "demo_04_search_no_match",
+          "old_passed": true,
+          "new_passed": true,
+          "status": "completed",
+          "actual_tools": [
+            "search_text"
+          ],
+          "expected_tools": [
+            "search_text"
+          ],
+          "new_facts_check": {
+            "passed": true,
+            "checks": [
+              {
+                "name": "search_completed_with_no_matches",
+                "passed": true,
+                "detail": "[{'evidence_id': 'E1', 'tool': 'search_text', 'matches': [], 'searched_files': 2, 'skipped': [], 'search_complete': True}]"
+              },
+              {
+                "name": "answer_reports_no_match",
+                "passed": true,
+                "detail": "docs 디렉터리에서 \"MISSING_NEEDLE_42\"를 찾는 데 실패했습니다. 검색 결과에 일치하는 항목이 없습니다 [E1]."
+              }
+            ],
+            "missing": [],
+            "tool_argument_summary": []
+          }
+        },
+        {
+          "case_id": "demo_05_list_then_read",
+          "old_passed": true,
+          "new_passed": true,
+          "status": "completed",
+          "actual_tools": [
+            "list_files",
+            "read_file"
+          ],
+          "expected_tools": [
+            "list_files",
+            "read_file"
+          ],
+          "new_facts_check": {
+            "passed": true,
+            "checks": [
+              {
+                "name": "listed_report_file",
+                "passed": true,
+                "detail": "[{'evidence_id': 'E1', 'tool': 'list_files', 'entries': [{'path': 'reports/quarter_summary.md', 'kind': 'file'}], 'complete': True, 'skipped': []}, {'evidence_id': 'E2', 'tool': 'read_file', 'path': 'reports/quarter_summary.md', 'line_start': 1, 'line_end': 3, 'bytes_read': 67, 'text_preview': '# Quarter Review\\n\\nSynthetic quarter report for the demo workspace.\\n'}]"
+              },
+              {
+                "name": "read_quarter_review",
+                "passed": true,
+                "detail": "# Quarter Review\n\nSynthetic quarter report for the demo workspace.\n"
+              },
+              {
+                "name": "answer_quarter_review",
+                "passed": true,
+                "detail": "보고서의 제목은 \"Quarter Review\"입니다. [E2]"
+              }
+            ],
+            "missing": [],
+            "tool_argument_summary": []
+          }
+        },
+        {
+          "case_id": "demo_06_read_two_files",
+          "old_passed": false,
+          "new_passed": false,
+          "status": "protocol_error",
+          "actual_tools": [],
+          "expected_tools": [
+            "read_file",
+            "read_file"
+          ],
+          "new_facts_check": {
+            "passed": false,
+            "checks": [
+              {
+                "name": "read_both_files",
+                "passed": false,
+                "detail": "[]"
+              },
+              {
+                "name": "evidence_has_common_project",
+                "passed": false,
+                "detail": ""
+              },
+              {
+                "name": "answer_common_project",
+                "passed": false,
+                "detail": ""
+              }
+            ],
+            "missing": [
+              "read_both_files",
+              "evidence_has_common_project",
+              "answer_common_project"
+            ],
+            "tool_argument_summary": []
+          }
+        }
+      ]
+    },
+    {
+      "path": "eval/agent_phase1_cli_demo_results_phase11_2026-10-06.json",
+      "old_summary": {
+        "case_count": 6,
+        "passed": 6,
+        "completed": 6,
+        "tool_sequence_matched": 6,
+        "facts_matched": 6,
+        "model_generation_attempts": 13,
+        "model_generation_responses": 13,
+        "prompt_tokens": 16080,
+        "output_tokens": 429,
+        "agent_elapsed_ms": 8202.224
+      },
+      "new_summary": {
+        "case_count": 6,
+        "passed": 6,
+        "completed": 6,
+        "tool_sequence_matched": 6,
+        "facts_matched": 6
+      },
+      "cases": [
+        {
+          "case_id": "demo_01_list_root",
+          "old_passed": true,
+          "new_passed": true,
+          "status": "completed",
+          "actual_tools": [
+            "list_files"
+          ],
+          "expected_tools": [
+            "list_files"
+          ],
+          "new_facts_check": {
+            "passed": true,
+            "checks": [
+              {
+                "name": "entry:README.md",
+                "passed": true,
+                "detail": "entries=['README.md', 'docs', 'reports', 'settings', 'src']"
+              },
+              {
+                "name": "entry:docs",
+                "passed": true,
+                "detail": "entries=['README.md', 'docs', 'reports', 'settings', 'src']"
+              },
+              {
+                "name": "entry:reports",
+                "passed": true,
+                "detail": "entries=['README.md', 'docs', 'reports', 'settings', 'src']"
+              },
+              {
+                "name": "entry:settings",
+                "passed": true,
+                "detail": "entries=['README.md', 'docs', 'reports', 'settings', 'src']"
+              },
+              {
+                "name": "entry:src",
+                "passed": true,
+                "detail": "entries=['README.md', 'docs', 'reports', 'settings', 'src']"
+              }
+            ],
+            "missing": [],
+            "tool_argument_summary": [
+              {
+                "tool": "list_files",
+                "arguments": {
+                  "path": "."
+                }
+              }
+            ]
+          }
+        },
+        {
+          "case_id": "demo_02_read_value",
+          "old_passed": true,
+          "new_passed": true,
+          "status": "completed",
+          "actual_tools": [
+            "read_file"
+          ],
+          "expected_tools": [
+            "read_file"
+          ],
+          "new_facts_check": {
+            "passed": true,
+            "checks": [
+              {
+                "name": "read_enabled_false",
+                "passed": true,
+                "detail": "{\"enabled\": false, \"mode\": \"demo\", \"limit\": 3}\n"
+              },
+              {
+                "name": "answer_says_false",
+                "passed": true,
+                "detail": "settings/app.json 파일에서 enabled 값은 false입니다. [E1]"
+              }
+            ],
+            "missing": [],
+            "tool_argument_summary": [
+              {
+                "tool": "read_file",
+                "arguments": {
+                  "path": "settings/app.json",
+                  "max_bytes": 12000
+                }
+              }
+            ]
+          }
+        },
+        {
+          "case_id": "demo_03_search_file",
+          "old_passed": true,
+          "new_passed": true,
+          "status": "completed",
+          "actual_tools": [
+            "search_text"
+          ],
+          "expected_tools": [
+            "search_text"
+          ],
+          "new_facts_check": {
+            "passed": true,
+            "checks": [
+              {
+                "name": "search_found_code_red_in_file",
+                "passed": true,
+                "detail": "[{'path': 'src/report.py', 'line': 2, 'text': '    marker = \"CODE_RED\"'}]"
+              },
+              {
+                "name": "answer_mentions_code_red",
+                "passed": true,
+                "detail": "src/report.py 파일에서 \"CODE_RED\"는 다음 위치에 존재합니다:  \n라인 2: `marker = \"CODE_RED\"` [E1]"
+              }
+            ],
+            "missing": [],
+            "tool_argument_summary": [
+              {
+                "tool": "search_text",
+                "arguments": {
+                  "query": "CODE_RED",
+                  "path": "src/report.py"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "case_id": "demo_04_search_no_match",
+          "old_passed": true,
+          "new_passed": true,
+          "status": "completed",
+          "actual_tools": [
+            "search_text"
+          ],
+          "expected_tools": [
+            "search_text"
+          ],
+          "new_facts_check": {
+            "passed": true,
+            "checks": [
+              {
+                "name": "search_completed_with_no_matches",
+                "passed": true,
+                "detail": "[{'evidence_id': 'E1', 'tool': 'search_text', 'matches': [], 'searched_files': 2, 'skipped': [], 'search_complete': True}]"
+              },
+              {
+                "name": "answer_reports_no_match",
+                "passed": true,
+                "detail": "docs 디렉터리에서 \"MISSING_NEEDLE_42\"를 검색했지만, 결과로 매칭된 항목이 없습니다. [E1]"
+              }
+            ],
+            "missing": [],
+            "tool_argument_summary": [
+              {
+                "tool": "search_text",
+                "arguments": {
+                  "query": "MISSING_NEEDLE_42",
+                  "path": "docs"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "case_id": "demo_05_list_then_read",
+          "old_passed": true,
+          "new_passed": true,
+          "status": "completed",
+          "actual_tools": [
+            "list_files",
+            "read_file"
+          ],
+          "expected_tools": [
+            "list_files",
+            "read_file"
+          ],
+          "new_facts_check": {
+            "passed": true,
+            "checks": [
+              {
+                "name": "listed_report_file",
+                "passed": true,
+                "detail": "[{'evidence_id': 'E1', 'tool': 'list_files', 'entries': [{'path': 'reports/quarter_summary.md', 'kind': 'file'}], 'complete': True, 'skipped': []}, {'evidence_id': 'E2', 'tool': 'read_file', 'path': 'reports/quarter_summary.md', 'line_start': 1, 'line_end': 3, 'bytes_read': 67, 'text_preview': '# Quarter Review\\n\\nSynthetic quarter report for the demo workspace.\\n'}]"
+              },
+              {
+                "name": "read_quarter_review",
+                "passed": true,
+                "detail": "# Quarter Review\n\nSynthetic quarter report for the demo workspace.\n"
+              },
+              {
+                "name": "answer_quarter_review",
+                "passed": true,
+                "detail": "보고서 제목은 \"Quarter Review\"입니다. [E2]"
+              }
+            ],
+            "missing": [],
+            "tool_argument_summary": [
+              {
+                "tool": "list_files",
+                "arguments": {
+                  "path": "reports"
+                }
+              },
+              {
+                "tool": "read_file",
+                "arguments": {
+                  "path": "reports/quarter_summary.md",
+                  "max_bytes": 12000
+                }
+              }
+            ]
+          }
+        },
+        {
+          "case_id": "demo_06_read_two_files",
+          "old_passed": true,
+          "new_passed": true,
+          "status": "completed",
+          "actual_tools": [
+            "read_file",
+            "read_file"
+          ],
+          "expected_tools": [
+            "read_file",
+            "read_file"
+          ],
+          "new_facts_check": {
+            "passed": true,
+            "checks": [
+              {
+                "name": "read_both_files",
+                "passed": true,
+                "detail": "['docs/alpha.md', 'docs/beta.md']"
+              },
+              {
+                "name": "evidence_has_common_project",
+                "passed": true,
+                "detail": "# Alpha Notes\n\nProject Helio uses local review notes.\nThe alpha file mentions Python.\n\n# Beta Notes\n\nProject Helio keeps demo material offline.\nThe beta file mentions SQLite.\n"
+              },
+              {
+                "name": "answer_common_project",
+                "passed": true,
+                "detail": "두 파일에 공통으로 등장하는 프로젝트 이름은 \"Project Helio\"입니다. [E1]과 [E2]에서 모두 언급됩니다."
+              }
+            ],
+            "missing": [],
+            "tool_argument_summary": [
+              {
+                "tool": "read_file",
+                "arguments": {
+                  "path": "docs/alpha.md",
+                  "max_bytes": 32768
+                }
+              },
+              {
+                "tool": "read_file",
+                "arguments": {
+                  "path": "docs/beta.md",
+                  "max_bytes": 32768
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

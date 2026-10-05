@@ -1,0 +1,197 @@
+{
+  "check": "phase12-context-overflow-check-2026-10-06",
+  "environment": {
+    "ollama": "0.34.4",
+    "model": "qwen3:4b-instruct-2507-q4_K_M",
+    "digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+    "options": {
+      "temperature": 0,
+      "num_ctx": 4096,
+      "num_predict": 768
+    },
+    "think": false,
+    "server_env": "OLLAMA_NO_CLOUD=1, OLLAMA_HOST=127.0.0.1:11434, OLLAMA_DEBUG=1 (debug logging only)"
+  },
+  "synthetic_inputs": {
+    "overflow_file": "data/table.txt: line 'FIRST_LINE_MARKER_Q7', 299 lines of 5-digit numbers, line 'LAST_LINE_MARKER_Z9'; 10207 bytes",
+    "small_file": "data/note.txt: 'Synthetic note.' and 'SMALL_NOTE_VALUE=42'",
+    "note": "Generated in a temporary scratch workspace; no user data. Probe scripts were ad hoc; inputs are described here."
+  },
+  "model_chat_requests_total": 11,
+  "model_chat_requests_note": "Counted from the Ollama server log (11 POST /api/chat).",
+  "before_fix": {
+    "p1_agent_run_overflow_last_message_too_large": {
+      "requests": 2,
+      "status": "ollama_error",
+      "failure_reason": "Ollama HTTP 400: {\"error\":\"{\\\"error\\\":{\\\"code\\\":400,\\\"message\\\":\\\"request (10815 tokens) exceeds the available context size (4096 tokens), try increasing it\\\",\\\"type\\\":\\\"exceed_context_size_error\\\",\\\"n_prompt_tokens\\\":10815,\\\"n_ctx\\\":4096}}\"}",
+      "turns": [
+        {
+          "turn": 1,
+          "prompt_tokens": 1113,
+          "done": true,
+          "done_reason": "stop"
+        },
+        {
+          "turn": 2,
+          "prompt_tokens": null,
+          "done": null,
+          "done_reason": null
+        }
+      ]
+    },
+    "p2_single_request_overflow": {
+      "requests": 1,
+      "error": "LocalModelError: Ollama HTTP 400: {\"error\":\"{\\\"error\\\":{\\\"code\\\":400,\\\"message\\\":\\\"request (10688 tokens) exceeds the available context size (4096 tokens), try increasing it\\\",\\\"type\\\":\\\"exceed_context_size_error\\\",\\\"n_prompt_tokens\\\":10688,\\\"n_ctx\\\":4096}}\"}",
+      "failed": {
+        "type": "LocalModelError",
+        "message": "Ollama HTTP 400: {\"error\":\"{\\\"error\\\":{\\\"code\\\":400,\\\"message\\\":\\\"request (10688 tokens) exceeds the available context size (4096 tokens), try increasing it\\\",\\\"type\\\":\\\"exceed_context_size_error\\\",\\\"n_prompt_tokens\\\":10688,\\\"n_ctx\\\":4096}}\"}"
+      }
+    }
+  },
+  "server_truncation_probe": {
+    "requests": 2,
+    "description": "system + user(QUESTION_MARKER_K3 ... PELICAN, 1275 bytes) + assistant + user(2553 bytes asking for the word after the marker). Full prompt 4772 tokens > 4096 but the last message fits.",
+    "default": {
+      "ok": true,
+      "prompt_eval_count": 3542,
+      "eval_count": 2,
+      "done_reason": "stop",
+      "content": "UNKNOWN"
+    },
+    "truncate_false": {
+      "ok": false,
+      "error": "LocalModelError: Ollama HTTP 400: {\"error\":\"{\\\"error\\\":{\\\"code\\\":400,\\\"message\\\":\\\"request (4772 tokens) exceeds the available context size (4096 tokens), try increasing it\\\",\\\"type\\\":\\\"exceed_context_size_error\\\",\\\"n_prompt_tokens\\\":4772,\\\"n_ctx\\\":4096}}\"}"
+    },
+    "interpretation": "Default: Ollama silently dropped older messages (prompt_eval_count 3542 < 4772), returned done_reason=stop, and the model answered UNKNOWN because the marker message was gone. truncate=false: explicit HTTP 400 exceed_context_size_error with n_prompt_tokens."
+  },
+  "shift_probe": {
+    "requests": 2,
+    "user_bytes": 2683,
+    "shift_default": {
+      "prompt_eval_count": 2625,
+      "eval_count": 768,
+      "sum": 3393,
+      "done": true,
+      "done_reason": "length"
+    },
+    "shift_false": {
+      "prompt_eval_count": 2625,
+      "eval_count": 768,
+      "sum": 3393,
+      "done": true,
+      "done_reason": "length"
+    },
+    "interpretation": "Inconclusive: prompt 2625 + num_predict 768 < 4096, so the context limit was not reached in either request. The effect of shift=false on 0.34.4 is unverified."
+  },
+  "after_fix_cli_confirmation": {
+    "requests": 4,
+    "small_file": {
+      "status": "completed",
+      "failure_reason": null,
+      "final_answer": "data/note.txt 파일에서 SMALL_NOTE_VALUE의 값은 42입니다.[E1]",
+      "payload_flags": [
+        {
+          "truncate": false,
+          "shift": false
+        },
+        {
+          "truncate": false,
+          "shift": false
+        }
+      ],
+      "turns": [
+        {
+          "turn": 1,
+          "prompt_tokens": 1100,
+          "done_reason": "stop",
+          "error_n_prompt_tokens": null,
+          "error_n_ctx": null
+        },
+        {
+          "turn": 2,
+          "prompt_tokens": 1301,
+          "done_reason": "stop",
+          "error_n_prompt_tokens": null,
+          "error_n_ctx": null
+        }
+      ],
+      "evidence": [
+        {
+          "tool": "read_file",
+          "path": "data/note.txt",
+          "bytes_read": 36
+        }
+      ],
+      "counts": {
+        "model_generation_attempts": 2,
+        "model_generation_responses": 2,
+        "tool_call_steps": 1,
+        "proposed_tool_calls": 1,
+        "tool_execution_attempts": 1,
+        "successful_tool_executions": 1,
+        "failed_tool_executions": 0,
+        "skipped_tool_calls": 0,
+        "evidence_count": 1,
+        "prompt_tokens": 2401,
+        "output_tokens": 55,
+        "elapsed_ms": 1544.768
+      },
+      "persistence_status": "saved",
+      "log_file": "20261005T170447Z-9c7b085c.json"
+    },
+    "overflow_file": {
+      "status": "context_budget_exceeded",
+      "failure_reason": "Ollama rejected the request: prompt 10882 tokens exceeds num_ctx 4096; server-side truncation is disabled, so no history was silently dropped",
+      "final_answer": null,
+      "payload_flags": [
+        {
+          "truncate": false,
+          "shift": false
+        },
+        {
+          "truncate": false,
+          "shift": false
+        }
+      ],
+      "turns": [
+        {
+          "turn": 1,
+          "prompt_tokens": 1113,
+          "done_reason": "stop",
+          "error_n_prompt_tokens": null,
+          "error_n_ctx": null
+        },
+        {
+          "turn": 2,
+          "prompt_tokens": null,
+          "done_reason": null,
+          "error_n_prompt_tokens": 10882,
+          "error_n_ctx": 4096
+        }
+      ],
+      "evidence": [
+        {
+          "tool": "read_file",
+          "path": "data/table.txt",
+          "bytes_read": 10207
+        }
+      ],
+      "counts": {
+        "model_generation_attempts": 2,
+        "model_generation_responses": 1,
+        "tool_call_steps": 1,
+        "proposed_tool_calls": 1,
+        "tool_execution_attempts": 1,
+        "successful_tool_executions": 1,
+        "failed_tool_executions": 0,
+        "skipped_tool_calls": 0,
+        "evidence_count": 1,
+        "prompt_tokens": 1113,
+        "output_tokens": 33,
+        "elapsed_ms": 473.371
+      },
+      "persistence_status": "saved",
+      "log_file": "20261005T170449Z-2ed4c5a4.json"
+    }
+  }
+}

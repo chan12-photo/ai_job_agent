@@ -1,0 +1,22 @@
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+*.sqlite3
+*.sqlite3-*
+*.db
+*.db-*
+*.log
+events.jsonl
+agent_runs/
+eval/agent_phase1_cli_run_logs*/
+*.gguf
+.env
+data/
+backups/
+*.assets/
+# Agent run logs contain absolute local paths; keep them out of git.
+eval/agent_*_logs_*/
+.DS_Store
+# Local-only material that must never be published (e.g. pre-redaction originals).
+local_only/

@@ -1,0 +1,46 @@
+{
+  "fixture_version": "phase1-readonly-cli-demo-v1",
+  "note": "Synthetic CLI demonstration cases for Phase 1. These cases are not an external benchmark.",
+  "workspace": "eval/agent_phase1_demo_workspace_2026-10-05",
+  "model": "qwen3:4b-instruct-2507-q4_K_M",
+  "max_model_calls_per_case": 4,
+  "max_tool_calls_per_case": 3,
+  "cases": [
+    {
+      "id": "demo_01_list_root",
+      "request": "이 workspace의 최상위 항목을 목록으로 확인해줘.",
+      "expected_tools": ["list_files"],
+      "expected_facts": ["README.md", "docs", "reports", "settings", "src"]
+    },
+    {
+      "id": "demo_02_read_value",
+      "request": "settings/app.json에서 enabled 값만 알려줘.",
+      "expected_tools": ["read_file"],
+      "expected_facts": ["enabled", "false"]
+    },
+    {
+      "id": "demo_03_search_file",
+      "request": "src/report.py 파일에서 CODE_RED를 찾아줘.",
+      "expected_tools": ["search_text"],
+      "expected_facts": ["src/report.py", "CODE_RED"]
+    },
+    {
+      "id": "demo_04_search_no_match",
+      "request": "docs 디렉터리에서 MISSING_NEEDLE_42를 찾아줘.",
+      "expected_tools": ["search_text"],
+      "expected_facts": ["MISSING_NEEDLE_42", "no_match"]
+    },
+    {
+      "id": "demo_05_list_then_read",
+      "request": "reports 디렉터리에 있는 보고서 파일을 확인한 다음, 그 파일을 읽고 보고서 제목을 알려줘.",
+      "expected_tools": ["list_files", "read_file"],
+      "expected_facts": ["reports/quarter_summary.md", "Quarter Review"]
+    },
+    {
+      "id": "demo_06_read_two_files",
+      "request": "docs/alpha.md와 docs/beta.md를 둘 다 읽고, 두 파일에 공통으로 등장하는 프로젝트 이름을 알려줘.",
+      "expected_tools": ["read_file", "read_file"],
+      "expected_facts": ["Project Helio"]
+    }
+  ]
+}

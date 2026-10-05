@@ -1,0 +1,116 @@
+{
+  "purpose": "Machine-specific absolute paths were replaced with placeholders before publishing. Only literal path prefixes changed.",
+  "placeholders": {
+    "<repo>": "absolute repository root on the author's machine",
+    "<home>": "the author's home directory",
+    "<tmp>": "macOS per-user temporary directory (/var/folders/.../T)"
+  },
+  "script": "scripts/redact_local_paths.py",
+  "files": [
+    {
+      "path": "eval/agent_phase05_claude_report_2026-10-01.md",
+      "original_sha256": "c569817fbdf2d474b5d1ed9d8763fe28ea84b158cba44bd3d104cd2f52bea4d0",
+      "redacted_sha256": "db434a100885a9991ad6e8a404b1a2b0296d992fb565c925d65d633708357b9b",
+      "replacements": {
+        "<repo>": 3
+      }
+    },
+    {
+      "path": "eval/agent_phase05_report_2026-10-01.md",
+      "original_sha256": "6af35d08a8a95f60aff1dc031958a81bfe31f38a3863957364a256f2ea581185",
+      "redacted_sha256": "47e8b11ce7f6318c2443e170e4eee4d8182c41f9f561d6e6cd2e86713d2c4667",
+      "replacements": {
+        "<repo>": 4
+      }
+    },
+    {
+      "path": "eval/agent_phase05_results_2026-10-01.json",
+      "original_sha256": "8bae0da56ec1415133420d517d93116115a194ebff57abc3d66731f0266135aa",
+      "redacted_sha256": "0d17d041a84facd7cff9bbb968b421fe1044078a879b47bd279ed05994f44809",
+      "replacements": {
+        "<tmp>": 20
+      }
+    },
+    {
+      "path": "eval/agent_phase05_results_2026-10-01_v1.json",
+      "original_sha256": "8bae0da56ec1415133420d517d93116115a194ebff57abc3d66731f0266135aa",
+      "redacted_sha256": "0d17d041a84facd7cff9bbb968b421fe1044078a879b47bd279ed05994f44809",
+      "replacements": {
+        "<tmp>": 20
+      }
+    },
+    {
+      "path": "eval/agent_phase05_results_2026-10-01_v2.json",
+      "original_sha256": "d35b2cacd5b822135e355d3747cfa1e5aca7964a5a29e0e08bc4d36709ba1ef4",
+      "redacted_sha256": "0d09ed765442600d532ae61d925b972a2194a6c2d692d4fc65ce745246e3ec13",
+      "replacements": {
+        "<tmp>": 20
+      }
+    },
+    {
+      "path": "eval/agent_phase12_model_results_2026-10-06.json",
+      "original_sha256": "14aed8f14b8728bf9ad218fc0d8bd5bf485d31cebbb266132e6d1169bcd5c072",
+      "redacted_sha256": "ea7d53a00644f55114f40322d4e066890904a9f2e647196096867e54ca2916e1",
+      "replacements": {
+        "<repo>": 5
+      }
+    },
+    {
+      "path": "eval/agent_phase12_usability_results_2026-10-06.json",
+      "original_sha256": "1d99cedcb0a93451749c9182d1b26f065c8ffad026278afb7acd912414b27f07",
+      "redacted_sha256": "efe6de5cc98e67796e590677d705d326f3d821a99c4861844381d98ad827785f",
+      "replacements": {
+        "<repo>": 12
+      }
+    },
+    {
+      "path": "eval/agent_phase1_cli_demo_results_2026-10-05.json",
+      "original_sha256": "bee35fbc7449adf3b9527181eeef26da3df2d0b1c854615ed0a8109fdc2d8699",
+      "redacted_sha256": "b6baa7f7de0afa49162cd18af5139bf8dc92842ea365c8f3b6372b3a35539606",
+      "replacements": {
+        "<repo>": 12
+      }
+    },
+    {
+      "path": "eval/agent_phase1_cli_demo_results_phase11_2026-10-06.json",
+      "original_sha256": "320cb2c920e6345195b5de0201295aae08dcdd84f872b4722c6dabe607a24213",
+      "redacted_sha256": "44ee57f1ee155176a78d6125ac2ee2754e464cb54f5813f368a60ca7766c48ae",
+      "replacements": {
+        "<repo>": 12
+      }
+    },
+    {
+      "path": "eval/agent_phase1_cli_demo_results_rerun_2026-10-05.json",
+      "original_sha256": "c478c869a1c0cba1086344d11644eddc82e4d8fa3fd4b108ac4802145aa2c445",
+      "redacted_sha256": "beabb1597f05dbc7881d4c13bc1180351a30837d04dccb26fa4842273e8be4d4",
+      "replacements": {
+        "<repo>": 12
+      }
+    },
+    {
+      "path": "eval/phase4_match_boundary_trial_2026-09-30.json",
+      "original_sha256": "93f4cd366b0468b2068f4a45d3663962cb861ccc505d85a8c5ecaca793fae634",
+      "redacted_sha256": "60519e419b9bf4521eb4f0f3d198e94a694022e940cfa78a217b969fe174ed89",
+      "replacements": {
+        "<repo>": 3
+      }
+    },
+    {
+      "path": "eval/phase4_order_markers_factorial_2026-09-30.json",
+      "original_sha256": "03300a35aa057e869e508e76e15abe589acd21209abf402f3fcdfff35b910ee5",
+      "redacted_sha256": "db068d311d6fb08493d9ca04aed6a805a6917e47585b5174c427b3e404a46833",
+      "replacements": {
+        "<repo>": 1
+      }
+    },
+    {
+      "path": "eval/review_claude_full_audit_2026-10-06.md",
+      "original_sha256": "d463b9898ff85cdadbf104142e419a9780c7ad3a4c42c9f414ce3b95972b3447",
+      "redacted_sha256": "72f950abcd9e8816f74b64646d050a6aa1aee5932669c8cd43d801697584ad8e",
+      "replacements": {
+        "<repo>": 8,
+        "<home>": 1
+      }
+    }
+  ]
+}

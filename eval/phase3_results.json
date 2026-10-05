@@ -1,0 +1,243 @@
+{
+  "prompt_version": "jd-extract-v2",
+  "case_count": 4,
+  "models": [
+    {
+      "model": "qwen3:1.7b",
+      "summary_correct_of_4": {
+        "company": 3,
+        "position": 3,
+        "deadline_raw": 3,
+        "requirements": 3
+      },
+      "first_attempt_valid": 3,
+      "validated": 3,
+      "median_seconds": 0.761,
+      "cases": [
+        {
+          "id": "dated_and_or",
+          "status": "validated",
+          "seconds": 1.201,
+          "attempts": 1,
+          "correct": {
+            "company": true,
+            "position": true,
+            "deadline_raw": true,
+            "requirements": true
+          },
+          "actual": {
+            "company": "가상회사",
+            "position": "데이터 분석가",
+            "deadline_raw": "2026-10-31"
+          },
+          "actual_requirements": [
+            [
+              "preferred",
+              "R 또는 Tableau"
+            ],
+            [
+              "required",
+              "Python과 SQL 실무 경험"
+            ]
+          ],
+          "model_digest": "8f68893c685c3ddff2aa3fffce2aa60a30bb2da65ca488b61fff134a4d1730e7",
+          "quantization": "Q4_K_M"
+        },
+        {
+          "id": "ambiguous_year",
+          "status": "validated",
+          "seconds": 0.56,
+          "attempts": 1,
+          "correct": {
+            "company": true,
+            "position": true,
+            "deadline_raw": true,
+            "requirements": true
+          },
+          "actual": {
+            "company": "예시기업",
+            "position": "서비스 기획자",
+            "deadline_raw": "10월 중"
+          },
+          "actual_requirements": [
+            [
+              "preferred",
+              "SQL"
+            ],
+            [
+              "required",
+              "사용자 조사 경험"
+            ]
+          ],
+          "model_digest": "8f68893c685c3ddff2aa3fffce2aa60a30bb2da65ca488b61fff134a4d1730e7",
+          "quantization": "Q4_K_M"
+        },
+        {
+          "id": "rolling_and_duty",
+          "status": "failed",
+          "seconds": 0.962,
+          "error_type": "InvalidExtraction",
+          "correct": {
+            "company": false,
+            "position": false,
+            "deadline_raw": false,
+            "requirements": false
+          }
+        },
+        {
+          "id": "missing_company_and_date",
+          "status": "validated",
+          "seconds": 0.396,
+          "attempts": 1,
+          "correct": {
+            "company": true,
+            "position": true,
+            "deadline_raw": true,
+            "requirements": true
+          },
+          "actual": {
+            "company": null,
+            "position": "UX 리서처",
+            "deadline_raw": null
+          },
+          "actual_requirements": [
+            [
+              "required",
+              "정성 조사 경험"
+            ]
+          ],
+          "model_digest": "8f68893c685c3ddff2aa3fffce2aa60a30bb2da65ca488b61fff134a4d1730e7",
+          "quantization": "Q4_K_M"
+        }
+      ]
+    },
+    {
+      "model": "qwen3:4b-instruct-2507-q4_K_M",
+      "summary_correct_of_4": {
+        "company": 3,
+        "position": 3,
+        "deadline_raw": 3,
+        "requirements": 3
+      },
+      "first_attempt_valid": 4,
+      "validated": 4,
+      "median_seconds": 0.949,
+      "cases": [
+        {
+          "id": "dated_and_or",
+          "status": "validated",
+          "seconds": 1.811,
+          "attempts": 1,
+          "correct": {
+            "company": true,
+            "position": true,
+            "deadline_raw": true,
+            "requirements": true
+          },
+          "actual": {
+            "company": "가상회사",
+            "position": "데이터 분석가",
+            "deadline_raw": "2026-10-31"
+          },
+          "actual_requirements": [
+            [
+              "preferred",
+              "R 또는 Tableau"
+            ],
+            [
+              "required",
+              "Python과 SQL 실무 경험"
+            ]
+          ],
+          "model_digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+          "quantization": "Q4_K_M"
+        },
+        {
+          "id": "ambiguous_year",
+          "status": "validated",
+          "seconds": 1.041,
+          "attempts": 1,
+          "correct": {
+            "company": true,
+            "position": true,
+            "deadline_raw": true,
+            "requirements": true
+          },
+          "actual": {
+            "company": "예시기업",
+            "position": "서비스 기획자",
+            "deadline_raw": "10월 중"
+          },
+          "actual_requirements": [
+            [
+              "preferred",
+              "SQL"
+            ],
+            [
+              "required",
+              "사용자 조사 경험"
+            ]
+          ],
+          "model_digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+          "quantization": "Q4_K_M"
+        },
+        {
+          "id": "rolling_and_duty",
+          "status": "validated",
+          "seconds": 0.857,
+          "attempts": 1,
+          "correct": {
+            "company": false,
+            "position": false,
+            "deadline_raw": false,
+            "requirements": false
+          },
+          "actual": {
+            "company": "가상 공고",
+            "position": "테스트상사 백엔드 개발자",
+            "deadline_raw": null
+          },
+          "actual_requirements": [
+            [
+              "required",
+              "Python 또는 Java"
+            ]
+          ],
+          "model_digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+          "quantization": "Q4_K_M"
+        },
+        {
+          "id": "missing_company_and_date",
+          "status": "validated",
+          "seconds": 0.735,
+          "attempts": 1,
+          "correct": {
+            "company": true,
+            "position": true,
+            "deadline_raw": true,
+            "requirements": true
+          },
+          "actual": {
+            "company": null,
+            "position": "UX 리서처",
+            "deadline_raw": null
+          },
+          "actual_requirements": [
+            [
+              "required",
+              "정성 조사 경험"
+            ]
+          ],
+          "model_digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+          "quantization": "Q4_K_M"
+        }
+      ]
+    }
+  ],
+  "request_options": {
+    "temperature": 0,
+    "num_ctx": 4096,
+    "num_predict": 768
+  },
+  "think": false
+}

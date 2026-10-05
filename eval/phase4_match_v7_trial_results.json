@@ -1,0 +1,745 @@
+{
+  "at_utc": "2026-09-30T06:11:25+00:00",
+  "model": "qwen3:4b-instruct-2507-q4_K_M",
+  "prompt_version": "match-v5+match_v7_trial_suffix",
+  "valid": 20,
+  "label_ok": 17,
+  "total": 20,
+  "cases": [
+    {
+      "id": "and_both",
+      "expected": [
+        "supported"
+      ],
+      "rationale": "두 기술 사용이 모두 직접 기록됨",
+      "requirement_quote": "Python과 SQL 사용 경험",
+      "candidates": [
+        "가상 프로젝트에서 Python 자동화를 구현하고 SQL 쿼리를 작성했습니다."
+      ],
+      "run": {
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "model_digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+        "runtime_version": "0.34.4",
+        "quantization": "Q4_K_M",
+        "total_duration_ns": 695339791,
+        "load_duration_ns": 661416,
+        "prompt_tokens": 825,
+        "output_tokens": 31,
+        "options": {
+          "temperature": 0,
+          "num_ctx": 4096,
+          "num_predict": 768
+        },
+        "think": false
+      },
+      "raw_response": "{\"matches\": [{\"assessment\": \"supported\", \"evidence_ids\": [1], \"requirement_id\": \"r1\"}]}",
+      "proposal": {
+        "assessment": "supported",
+        "evidence_ids": [
+          1
+        ],
+        "requirement_id": "r1"
+      },
+      "valid": true,
+      "label_ok": true
+    },
+    {
+      "id": "and_one",
+      "expected": [
+        "partial"
+      ],
+      "rationale": "Python만 기록되고 SQL은 미확인",
+      "requirement_quote": "Python과 SQL 사용 경험",
+      "candidates": [
+        "가상 프로젝트에서 Python 자동화를 구현했습니다."
+      ],
+      "run": {
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "model_digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+        "runtime_version": "0.34.4",
+        "quantization": "Q4_K_M",
+        "total_duration_ns": 493862125,
+        "load_duration_ns": 724875,
+        "prompt_tokens": 818,
+        "output_tokens": 32,
+        "options": {
+          "temperature": 0,
+          "num_ctx": 4096,
+          "num_predict": 768
+        },
+        "think": false
+      },
+      "raw_response": "{\"matches\": [{\"assessment\": \"partial\", \"evidence_ids\": [1], \"requirement_id\": \"r1\"}]}",
+      "proposal": {
+        "assessment": "partial",
+        "evidence_ids": [
+          1
+        ],
+        "requirement_id": "r1"
+      },
+      "valid": true,
+      "label_ok": true
+    },
+    {
+      "id": "not_recorded_is_not_absence",
+      "expected": [
+        "partial",
+        "insufficient_evidence"
+      ],
+      "rationale": "SQL의 실제 경험 유무와 실무 범위는 문서로 확정할 수 없음",
+      "requirement_quote": "Python과 SQL 실무 경험",
+      "candidates": [
+        "Python으로 자동화를 구현했습니다. SQL 경험은 이 문서에 기록하지 않았습니다."
+      ],
+      "run": {
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "model_digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+        "runtime_version": "0.34.4",
+        "quantization": "Q4_K_M",
+        "total_duration_ns": 493496625,
+        "load_duration_ns": 795375,
+        "prompt_tokens": 825,
+        "output_tokens": 32,
+        "options": {
+          "temperature": 0,
+          "num_ctx": 4096,
+          "num_predict": 768
+        },
+        "think": false
+      },
+      "raw_response": "{\"matches\": [{\"assessment\": \"partial\", \"evidence_ids\": [1], \"requirement_id\": \"r1\"}]}",
+      "proposal": {
+        "assessment": "partial",
+        "evidence_ids": [
+          1
+        ],
+        "requirement_id": "r1"
+      },
+      "valid": true,
+      "label_ok": true
+    },
+    {
+      "id": "or_one",
+      "expected": [
+        "supported"
+      ],
+      "rationale": "또는 조건의 한 가지가 직접 기록됨",
+      "requirement_quote": "Python 또는 Java 사용 경험",
+      "candidates": [
+        "가상 프로젝트에서 Python으로 API를 구현했습니다."
+      ],
+      "run": {
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "model_digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+        "runtime_version": "0.34.4",
+        "quantization": "Q4_K_M",
+        "total_duration_ns": 481439875,
+        "load_duration_ns": 680500,
+        "prompt_tokens": 817,
+        "output_tokens": 31,
+        "options": {
+          "temperature": 0,
+          "num_ctx": 4096,
+          "num_predict": 768
+        },
+        "think": false
+      },
+      "raw_response": "{\"matches\": [{\"assessment\": \"supported\", \"evidence_ids\": [1], \"requirement_id\": \"r1\"}]}",
+      "proposal": {
+        "assessment": "supported",
+        "evidence_ids": [
+          1
+        ],
+        "requirement_id": "r1"
+      },
+      "valid": true,
+      "label_ok": true
+    },
+    {
+      "id": "explicit_negative",
+      "expected": [
+        "insufficient_evidence"
+      ],
+      "rationale": "부정 문장이 긍정 사용의 증거가 아님",
+      "requirement_quote": "Python 사용 경험",
+      "candidates": [
+        "가상 프로젝트에서는 Python을 사용하지 않았습니다."
+      ],
+      "run": {
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "model_digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+        "runtime_version": "0.34.4",
+        "quantization": "Q4_K_M",
+        "total_duration_ns": 537569375,
+        "load_duration_ns": 1101750,
+        "prompt_tokens": 814,
+        "output_tokens": 35,
+        "options": {
+          "temperature": 0,
+          "num_ctx": 4096,
+          "num_predict": 768
+        },
+        "think": false
+      },
+      "raw_response": "{\"matches\": [{\"assessment\": \"insufficient_evidence\", \"evidence_ids\": [1], \"requirement_id\": \"r1\"}]}",
+      "proposal": {
+        "assessment": "insufficient_evidence",
+        "evidence_ids": [
+          1
+        ],
+        "requirement_id": "r1"
+      },
+      "valid": true,
+      "label_ok": true
+    },
+    {
+      "id": "team_not_personal",
+      "expected": [
+        "insufficient_evidence"
+      ],
+      "rationale": "팀 성과만 있고 본인의 직접 기여는 미확인",
+      "requirement_quote": "본인이 직접 비용 20% 절감",
+      "candidates": [
+        "가상 프로젝트 팀 전체가 비용을 20% 절감했습니다. 개인별 기여는 기록하지 않았습니다."
+      ],
+      "run": {
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "model_digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+        "runtime_version": "0.34.4",
+        "quantization": "Q4_K_M",
+        "total_duration_ns": 504539667,
+        "load_duration_ns": 720208,
+        "prompt_tokens": 842,
+        "output_tokens": 33,
+        "options": {
+          "temperature": 0,
+          "num_ctx": 4096,
+          "num_predict": 768
+        },
+        "think": false
+      },
+      "raw_response": "{\"matches\": [{\"assessment\": \"insufficient_evidence\", \"evidence_ids\": [],\"requirement_id\": \"r1\"}]}",
+      "proposal": {
+        "assessment": "insufficient_evidence",
+        "evidence_ids": [],
+        "requirement_id": "r1"
+      },
+      "valid": true,
+      "label_ok": true
+    },
+    {
+      "id": "duration_short",
+      "expected": [
+        "partial"
+      ],
+      "rationale": "기술·업무는 기록되나 3년 조건은 미충족",
+      "requirement_quote": "Python 개발 경력 3년 이상",
+      "candidates": [
+        "가상 회사에서 Python 개발 업무를 1년 수행했습니다."
+      ],
+      "run": {
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "model_digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+        "runtime_version": "0.34.4",
+        "quantization": "Q4_K_M",
+        "total_duration_ns": 493299542,
+        "load_duration_ns": 5169459,
+        "prompt_tokens": 824,
+        "output_tokens": 32,
+        "options": {
+          "temperature": 0,
+          "num_ctx": 4096,
+          "num_predict": 768
+        },
+        "think": false
+      },
+      "raw_response": "{\"matches\": [{\"assessment\": \"partial\", \"evidence_ids\": [1], \"requirement_id\": \"r1\"}]}",
+      "proposal": {
+        "assessment": "partial",
+        "evidence_ids": [
+          1
+        ],
+        "requirement_id": "r1"
+      },
+      "valid": true,
+      "label_ok": true
+    },
+    {
+      "id": "source_conflict",
+      "expected": [
+        "conflicting_evidence"
+      ],
+      "rationale": "동일한 가상 프로젝트의 두 기록이 충돌함",
+      "requirement_quote": "SQL 사용 경험",
+      "candidates": [
+        "가상 프로젝트에서 SQL 쿼리를 작성했습니다.",
+        "가상 프로젝트에서 SQL을 사용한 적이 없다고 기록했습니다."
+      ],
+      "run": {
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "model_digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+        "runtime_version": "0.34.4",
+        "quantization": "Q4_K_M",
+        "total_duration_ns": 580876250,
+        "load_duration_ns": 703292,
+        "prompt_tokens": 863,
+        "output_tokens": 38,
+        "options": {
+          "temperature": 0,
+          "num_ctx": 4096,
+          "num_predict": 768
+        },
+        "think": false
+      },
+      "raw_response": "{\"matches\": [{\"assessment\": \"conflicting_evidence\", \"evidence_ids\": [1, 2], \"requirement_id\": \"r1\"}]}",
+      "proposal": {
+        "assessment": "conflicting_evidence",
+        "evidence_ids": [
+          1,
+          2
+        ],
+        "requirement_id": "r1"
+      },
+      "valid": true,
+      "label_ok": true
+    },
+    {
+      "id": "duration_exact",
+      "expected": [
+        "supported"
+      ],
+      "rationale": "기술·업무·기간이 직접 기록됨",
+      "requirement_quote": "Python 개발 경력 3년 이상",
+      "candidates": [
+        "가상 회사에서 Python 개발 업무를 3년 2개월 수행했습니다."
+      ],
+      "run": {
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "model_digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+        "runtime_version": "0.34.4",
+        "quantization": "Q4_K_M",
+        "total_duration_ns": 484912041,
+        "load_duration_ns": 692333,
+        "prompt_tokens": 828,
+        "output_tokens": 31,
+        "options": {
+          "temperature": 0,
+          "num_ctx": 4096,
+          "num_predict": 768
+        },
+        "think": false
+      },
+      "raw_response": "{\"matches\": [{\"assessment\": \"supported\", \"evidence_ids\": [1], \"requirement_id\": \"r1\"}]}",
+      "proposal": {
+        "assessment": "supported",
+        "evidence_ids": [
+          1
+        ],
+        "requirement_id": "r1"
+      },
+      "valid": true,
+      "label_ok": true
+    },
+    {
+      "id": "skill_negated",
+      "expected": [
+        "insufficient_evidence"
+      ],
+      "rationale": "기술명이 포함돼도 부정 문장임",
+      "requirement_quote": "R 사용 경험",
+      "candidates": [
+        "가상 프로젝트에서 R을 사용하지 않았습니다."
+      ],
+      "run": {
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "model_digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+        "runtime_version": "0.34.4",
+        "quantization": "Q4_K_M",
+        "total_duration_ns": 516959417,
+        "load_duration_ns": 756709,
+        "prompt_tokens": 814,
+        "output_tokens": 34,
+        "options": {
+          "temperature": 0,
+          "num_ctx": 4096,
+          "num_predict": 768
+        },
+        "think": false
+      },
+      "raw_response": "{\"matches\": [{\"assessment\": \"insufficient_evidence\", \"evidence_ids\": [], \"requirement_id\": \"r1\"}]}",
+      "proposal": {
+        "assessment": "insufficient_evidence",
+        "evidence_ids": [],
+        "requirement_id": "r1"
+      },
+      "valid": true,
+      "label_ok": true
+    },
+    {
+      "id": "related_not_direct",
+      "expected": [
+        "insufficient_evidence"
+      ],
+      "rationale": "보고서 검토는 인터뷰 직접 수행과 다름",
+      "requirement_quote": "사용자 인터뷰 직접 수행",
+      "candidates": [
+        "가상 프로젝트에서 사용자 인터뷰 결과 보고서를 검토했습니다."
+      ],
+      "run": {
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "model_digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+        "runtime_version": "0.34.4",
+        "quantization": "Q4_K_M",
+        "total_duration_ns": 501775041,
+        "load_duration_ns": 810125,
+        "prompt_tokens": 828,
+        "output_tokens": 33,
+        "options": {
+          "temperature": 0,
+          "num_ctx": 4096,
+          "num_predict": 768
+        },
+        "think": false
+      },
+      "raw_response": "{\"matches\": [{\"assessment\": \"insufficient_evidence\", \"evidence_ids\": [],\"requirement_id\": \"r1\"}]}",
+      "proposal": {
+        "assessment": "insufficient_evidence",
+        "evidence_ids": [],
+        "requirement_id": "r1"
+      },
+      "valid": true,
+      "label_ok": true
+    },
+    {
+      "id": "duty_direct",
+      "expected": [
+        "supported"
+      ],
+      "rationale": "요구 업무 수행이 직접 기록됨",
+      "requirement_quote": "API 개발",
+      "candidates": [
+        "가상 프로젝트에서 REST API를 직접 설계하고 개발했습니다."
+      ],
+      "run": {
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "model_digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+        "runtime_version": "0.34.4",
+        "quantization": "Q4_K_M",
+        "total_duration_ns": 479616250,
+        "load_duration_ns": 699875,
+        "prompt_tokens": 818,
+        "output_tokens": 31,
+        "options": {
+          "temperature": 0,
+          "num_ctx": 4096,
+          "num_predict": 768
+        },
+        "think": false
+      },
+      "raw_response": "{\"matches\": [{\"assessment\": \"supported\", \"evidence_ids\": [1], \"requirement_id\": \"r1\"}]}",
+      "proposal": {
+        "assessment": "supported",
+        "evidence_ids": [
+          1
+        ],
+        "requirement_id": "r1"
+      },
+      "valid": true,
+      "label_ok": true
+    },
+    {
+      "id": "or_second",
+      "expected": [
+        "supported"
+      ],
+      "rationale": "또는 조건의 두 번째 항목이 직접 기록됨",
+      "requirement_quote": "Python 또는 Java 사용 경험",
+      "candidates": [
+        "가상 프로젝트에서 Java로 서버를 구현했습니다."
+      ],
+      "run": {
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "model_digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+        "runtime_version": "0.34.4",
+        "quantization": "Q4_K_M",
+        "total_duration_ns": 478721084,
+        "load_duration_ns": 745042,
+        "prompt_tokens": 818,
+        "output_tokens": 31,
+        "options": {
+          "temperature": 0,
+          "num_ctx": 4096,
+          "num_predict": 768
+        },
+        "think": false
+      },
+      "raw_response": "{\"matches\": [{\"assessment\": \"supported\", \"evidence_ids\": [1], \"requirement_id\": \"r1\"}]}",
+      "proposal": {
+        "assessment": "supported",
+        "evidence_ids": [
+          1
+        ],
+        "requirement_id": "r1"
+      },
+      "valid": true,
+      "label_ok": true
+    },
+    {
+      "id": "or_neither",
+      "expected": [
+        "insufficient_evidence"
+      ],
+      "rationale": "두 기술 중 어느 것도 기록되지 않음",
+      "requirement_quote": "Python 또는 Java 사용 경험",
+      "candidates": [
+        "가상 프로젝트에서 C++ 코드를 작성했습니다."
+      ],
+      "run": {
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "model_digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+        "runtime_version": "0.34.4",
+        "quantization": "Q4_K_M",
+        "total_duration_ns": 497805459,
+        "load_duration_ns": 4991250,
+        "prompt_tokens": 816,
+        "output_tokens": 33,
+        "options": {
+          "temperature": 0,
+          "num_ctx": 4096,
+          "num_predict": 768
+        },
+        "think": false
+      },
+      "raw_response": "{\"matches\": [{\"assessment\": \"insufficient_evidence\", \"evidence_ids\": [],\"requirement_id\": \"r1\"}]}",
+      "proposal": {
+        "assessment": "insufficient_evidence",
+        "evidence_ids": [],
+        "requirement_id": "r1"
+      },
+      "valid": true,
+      "label_ok": true
+    },
+    {
+      "id": "personal_vs_team",
+      "expected": [
+        "insufficient_evidence"
+      ],
+      "rationale": "팀 활동을 개인 직접 수행으로 바꿀 수 없음",
+      "requirement_quote": "본인이 직접 사용자 인터뷰 수행",
+      "candidates": [
+        "가상 프로젝트 팀에서 사용자 인터뷰를 수행했습니다. 개인별 담당 업무는 기록하지 않았습니다."
+      ],
+      "run": {
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "model_digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+        "runtime_version": "0.34.4",
+        "quantization": "Q4_K_M",
+        "total_duration_ns": 496068583,
+        "load_duration_ns": 649875,
+        "prompt_tokens": 839,
+        "output_tokens": 32,
+        "options": {
+          "temperature": 0,
+          "num_ctx": 4096,
+          "num_predict": 768
+        },
+        "think": false
+      },
+      "raw_response": "{\"matches\": [{\"assessment\": \"partial\", \"evidence_ids\": [1], \"requirement_id\": \"r1\"}]}",
+      "proposal": {
+        "assessment": "partial",
+        "evidence_ids": [
+          1
+        ],
+        "requirement_id": "r1"
+      },
+      "valid": true,
+      "label_ok": false
+    },
+    {
+      "id": "duration_unrelated",
+      "expected": [
+        "insufficient_evidence"
+      ],
+      "rationale": "근무 기간과 Python 개발 기간은 같다고 할 수 없음",
+      "requirement_quote": "Python 개발 경력 3년 이상",
+      "candidates": [
+        "가상 회사에서 3년 근무했고 Python 온라인 강의를 수강했습니다."
+      ],
+      "run": {
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "model_digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+        "runtime_version": "0.34.4",
+        "quantization": "Q4_K_M",
+        "total_duration_ns": 495250042,
+        "load_duration_ns": 763667,
+        "prompt_tokens": 831,
+        "output_tokens": 32,
+        "options": {
+          "temperature": 0,
+          "num_ctx": 4096,
+          "num_predict": 768
+        },
+        "think": false
+      },
+      "raw_response": "{\"matches\": [{\"assessment\": \"partial\", \"evidence_ids\": [1], \"requirement_id\": \"r1\"}]}",
+      "proposal": {
+        "assessment": "partial",
+        "evidence_ids": [
+          1
+        ],
+        "requirement_id": "r1"
+      },
+      "valid": true,
+      "label_ok": false
+    },
+    {
+      "id": "and_three_two",
+      "expected": [
+        "partial"
+      ],
+      "rationale": "세 항목 중 두 항목만 직접 기록됨",
+      "requirement_quote": "Python과 SQL 및 Tableau 사용 경험",
+      "candidates": [
+        "가상 프로젝트에서 Python과 SQL을 사용했습니다."
+      ],
+      "run": {
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "model_digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+        "runtime_version": "0.34.4",
+        "quantization": "Q4_K_M",
+        "total_duration_ns": 492648208,
+        "load_duration_ns": 691250,
+        "prompt_tokens": 819,
+        "output_tokens": 32,
+        "options": {
+          "temperature": 0,
+          "num_ctx": 4096,
+          "num_predict": 768
+        },
+        "think": false
+      },
+      "raw_response": "{\"matches\": [{\"assessment\": \"partial\", \"evidence_ids\": [1], \"requirement_id\": \"r1\"}]}",
+      "proposal": {
+        "assessment": "partial",
+        "evidence_ids": [
+          1
+        ],
+        "requirement_id": "r1"
+      },
+      "valid": true,
+      "label_ok": true
+    },
+    {
+      "id": "two_sources_support",
+      "expected": [
+        "supported"
+      ],
+      "rationale": "두 근거를 합치면 AND 조건이 모두 직접 기록됨",
+      "requirement_quote": "Python과 SQL 사용 경험",
+      "candidates": [
+        "가상 프로젝트 A에서 Python으로 자동화했습니다.",
+        "가상 프로젝트 B에서 SQL 쿼리를 작성했습니다."
+      ],
+      "run": {
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "model_digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+        "runtime_version": "0.34.4",
+        "quantization": "Q4_K_M",
+        "total_duration_ns": 541655292,
+        "load_duration_ns": 724917,
+        "prompt_tokens": 862,
+        "output_tokens": 35,
+        "options": {
+          "temperature": 0,
+          "num_ctx": 4096,
+          "num_predict": 768
+        },
+        "think": false
+      },
+      "raw_response": "{\"matches\": [{\"assessment\": \"partial\", \"evidence_ids\": [1, 2], \"requirement_id\": \"r1\"}]}",
+      "proposal": {
+        "assessment": "partial",
+        "evidence_ids": [
+          1,
+          2
+        ],
+        "requirement_id": "r1"
+      },
+      "valid": true,
+      "label_ok": false
+    },
+    {
+      "id": "quantified_team_only",
+      "expected": [
+        "insufficient_evidence"
+      ],
+      "rationale": "팀 수치를 개인 기여 수치로 바꿀 수 없음",
+      "requirement_quote": "본인이 직접 처리 시간을 30% 단축",
+      "candidates": [
+        "가상 프로젝트 팀 전체의 처리 시간이 30% 단축됐습니다."
+      ],
+      "run": {
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "model_digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+        "runtime_version": "0.34.4",
+        "quantization": "Q4_K_M",
+        "total_duration_ns": 502469458,
+        "load_duration_ns": 764916,
+        "prompt_tokens": 831,
+        "output_tokens": 33,
+        "options": {
+          "temperature": 0,
+          "num_ctx": 4096,
+          "num_predict": 768
+        },
+        "think": false
+      },
+      "raw_response": "{\"matches\": [{\"assessment\": \"insufficient_evidence\", \"evidence_ids\": [],\"requirement_id\": \"r1\"}]}",
+      "proposal": {
+        "assessment": "insufficient_evidence",
+        "evidence_ids": [],
+        "requirement_id": "r1"
+      },
+      "valid": true,
+      "label_ok": true
+    },
+    {
+      "id": "direct_research",
+      "expected": [
+        "supported"
+      ],
+      "rationale": "직접 수행이 명시됨",
+      "requirement_quote": "사용자 인터뷰 직접 수행",
+      "candidates": [
+        "가상 서비스에서 사용자 8명을 직접 인터뷰하고 질문지를 작성했습니다."
+      ],
+      "run": {
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "model_digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+        "runtime_version": "0.34.4",
+        "quantization": "Q4_K_M",
+        "total_duration_ns": 483500459,
+        "load_duration_ns": 695709,
+        "prompt_tokens": 825,
+        "output_tokens": 31,
+        "options": {
+          "temperature": 0,
+          "num_ctx": 4096,
+          "num_predict": 768
+        },
+        "think": false
+      },
+      "raw_response": "{\"matches\": [{\"assessment\": \"supported\", \"evidence_ids\": [1], \"requirement_id\": \"r1\"}]}",
+      "proposal": {
+        "assessment": "supported",
+        "evidence_ids": [
+          1
+        ],
+        "requirement_id": "r1"
+      },
+      "valid": true,
+      "label_ok": true
+    }
+  ]
+}

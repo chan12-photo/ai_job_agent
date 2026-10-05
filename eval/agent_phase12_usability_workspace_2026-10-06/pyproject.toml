@@ -1,0 +1,5 @@
+[project]
+name = "kestrel-inventory"
+version = "0.3.0"
+requires-python = ">=3.11"
+description = "Synthetic inventory service fixture"

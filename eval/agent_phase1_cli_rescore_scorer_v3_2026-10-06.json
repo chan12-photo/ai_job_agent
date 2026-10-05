@@ -1,0 +1,336 @@
+{
+  "rescore_version": "phase1-demo-scorer-v3-offline",
+  "note": "Offline re-score of saved synthetic Phase 1 demo outputs. Inputs are preserved; this is not a new model run.",
+  "scorer_sha256": "b7bb7a80aab5cddc4a37ead227b6f989aaa4a164314ba7dbc9b1b854da4d9aea",
+  "inputs": [
+    {
+      "path": "eval/agent_phase1_cli_demo_results_rerun_2026-10-05.json",
+      "input_sha256": "c478c869a1c0cba1086344d11644eddc82e4d8fa3fd4b108ac4802145aa2c445",
+      "input_scorer_version": "phase1-demo-scorer-v1 (field absent)",
+      "old_summary": {
+        "case_count": 6,
+        "passed": 5,
+        "completed": 5,
+        "tool_sequence_matched": 5,
+        "facts_matched": 5,
+        "model_generation_attempts": 12,
+        "model_generation_responses": 12,
+        "prompt_tokens": 13768,
+        "output_tokens": 422,
+        "agent_elapsed_ms": 8064.705
+      },
+      "new_summary": {
+        "case_count": 6,
+        "passed": 5,
+        "facts_matched": 5,
+        "facts_manual_review": 0,
+        "unverified": 0
+      },
+      "cases": [
+        {
+          "case_id": "demo_01_list_root",
+          "old_passed": true,
+          "old_facts_passed": true,
+          "new_passed": true,
+          "new_facts_passed": true,
+          "new_missing": [],
+          "new_manual_review": [],
+          "status": "completed",
+          "actual_tools": [
+            "list_files"
+          ],
+          "tool_arguments": [
+            {
+              "tool": "list_files",
+              "arguments": {
+                "path": "."
+              }
+            }
+          ]
+        },
+        {
+          "case_id": "demo_02_read_value",
+          "old_passed": true,
+          "old_facts_passed": true,
+          "new_passed": true,
+          "new_facts_passed": true,
+          "new_missing": [],
+          "new_manual_review": [],
+          "status": "completed",
+          "actual_tools": [
+            "read_file"
+          ],
+          "tool_arguments": [
+            {
+              "tool": "read_file",
+              "arguments": {
+                "path": "settings/app.json",
+                "max_bytes": 12000
+              }
+            }
+          ]
+        },
+        {
+          "case_id": "demo_03_search_file",
+          "old_passed": true,
+          "old_facts_passed": true,
+          "new_passed": true,
+          "new_facts_passed": true,
+          "new_missing": [],
+          "new_manual_review": [],
+          "status": "completed",
+          "actual_tools": [
+            "search_text"
+          ],
+          "tool_arguments": [
+            {
+              "tool": "search_text",
+              "arguments": {
+                "query": "CODE_RED",
+                "path": "src/report.py"
+              }
+            }
+          ]
+        },
+        {
+          "case_id": "demo_04_search_no_match",
+          "old_passed": true,
+          "old_facts_passed": true,
+          "new_passed": true,
+          "new_facts_passed": true,
+          "new_missing": [],
+          "new_manual_review": [],
+          "status": "completed",
+          "actual_tools": [
+            "search_text"
+          ],
+          "tool_arguments": [
+            {
+              "tool": "search_text",
+              "arguments": {
+                "query": "MISSING_NEEDLE_42",
+                "path": "docs"
+              }
+            }
+          ]
+        },
+        {
+          "case_id": "demo_05_list_then_read",
+          "old_passed": true,
+          "old_facts_passed": true,
+          "new_passed": true,
+          "new_facts_passed": true,
+          "new_missing": [],
+          "new_manual_review": [],
+          "status": "completed",
+          "actual_tools": [
+            "list_files",
+            "read_file"
+          ],
+          "tool_arguments": [
+            {
+              "tool": "list_files",
+              "arguments": {
+                "path": "reports"
+              }
+            },
+            {
+              "tool": "read_file",
+              "arguments": {
+                "path": "reports/quarter_summary.md"
+              }
+            }
+          ]
+        },
+        {
+          "case_id": "demo_06_read_two_files",
+          "old_passed": false,
+          "old_facts_passed": false,
+          "new_passed": false,
+          "new_facts_passed": false,
+          "new_missing": [
+            "read_both_files",
+            "evidence_has_common_project",
+            "answer_common_project"
+          ],
+          "new_manual_review": [],
+          "status": "protocol_error",
+          "actual_tools": [],
+          "tool_arguments": []
+        }
+      ]
+    },
+    {
+      "path": "eval/agent_phase1_cli_demo_results_phase11_2026-10-06.json",
+      "input_sha256": "320cb2c920e6345195b5de0201295aae08dcdd84f872b4722c6dabe607a24213",
+      "input_scorer_version": "phase1-demo-scorer-v1 (field absent)",
+      "old_summary": {
+        "case_count": 6,
+        "passed": 6,
+        "completed": 6,
+        "tool_sequence_matched": 6,
+        "facts_matched": 6,
+        "model_generation_attempts": 13,
+        "model_generation_responses": 13,
+        "prompt_tokens": 16080,
+        "output_tokens": 429,
+        "agent_elapsed_ms": 8202.224
+      },
+      "new_summary": {
+        "case_count": 6,
+        "passed": 6,
+        "facts_matched": 6,
+        "facts_manual_review": 0,
+        "unverified": 0
+      },
+      "cases": [
+        {
+          "case_id": "demo_01_list_root",
+          "old_passed": true,
+          "old_facts_passed": true,
+          "new_passed": true,
+          "new_facts_passed": true,
+          "new_missing": [],
+          "new_manual_review": [],
+          "status": "completed",
+          "actual_tools": [
+            "list_files"
+          ],
+          "tool_arguments": [
+            {
+              "tool": "list_files",
+              "arguments": {
+                "path": "."
+              }
+            }
+          ]
+        },
+        {
+          "case_id": "demo_02_read_value",
+          "old_passed": true,
+          "old_facts_passed": true,
+          "new_passed": true,
+          "new_facts_passed": true,
+          "new_missing": [],
+          "new_manual_review": [],
+          "status": "completed",
+          "actual_tools": [
+            "read_file"
+          ],
+          "tool_arguments": [
+            {
+              "tool": "read_file",
+              "arguments": {
+                "path": "settings/app.json",
+                "max_bytes": 12000
+              }
+            }
+          ]
+        },
+        {
+          "case_id": "demo_03_search_file",
+          "old_passed": true,
+          "old_facts_passed": true,
+          "new_passed": true,
+          "new_facts_passed": true,
+          "new_missing": [],
+          "new_manual_review": [],
+          "status": "completed",
+          "actual_tools": [
+            "search_text"
+          ],
+          "tool_arguments": [
+            {
+              "tool": "search_text",
+              "arguments": {
+                "query": "CODE_RED",
+                "path": "src/report.py"
+              }
+            }
+          ]
+        },
+        {
+          "case_id": "demo_04_search_no_match",
+          "old_passed": true,
+          "old_facts_passed": true,
+          "new_passed": true,
+          "new_facts_passed": true,
+          "new_missing": [],
+          "new_manual_review": [],
+          "status": "completed",
+          "actual_tools": [
+            "search_text"
+          ],
+          "tool_arguments": [
+            {
+              "tool": "search_text",
+              "arguments": {
+                "query": "MISSING_NEEDLE_42",
+                "path": "docs"
+              }
+            }
+          ]
+        },
+        {
+          "case_id": "demo_05_list_then_read",
+          "old_passed": true,
+          "old_facts_passed": true,
+          "new_passed": true,
+          "new_facts_passed": true,
+          "new_missing": [],
+          "new_manual_review": [],
+          "status": "completed",
+          "actual_tools": [
+            "list_files",
+            "read_file"
+          ],
+          "tool_arguments": [
+            {
+              "tool": "list_files",
+              "arguments": {
+                "path": "reports"
+              }
+            },
+            {
+              "tool": "read_file",
+              "arguments": {
+                "path": "reports/quarter_summary.md",
+                "max_bytes": 12000
+              }
+            }
+          ]
+        },
+        {
+          "case_id": "demo_06_read_two_files",
+          "old_passed": true,
+          "old_facts_passed": true,
+          "new_passed": true,
+          "new_facts_passed": true,
+          "new_missing": [],
+          "new_manual_review": [],
+          "status": "completed",
+          "actual_tools": [
+            "read_file",
+            "read_file"
+          ],
+          "tool_arguments": [
+            {
+              "tool": "read_file",
+              "arguments": {
+                "path": "docs/alpha.md",
+                "max_bytes": 32768
+              }
+            },
+            {
+              "tool": "read_file",
+              "arguments": {
+                "path": "docs/beta.md",
+                "max_bytes": 32768
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

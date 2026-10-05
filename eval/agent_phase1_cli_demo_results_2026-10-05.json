@@ -1,0 +1,355 @@
+{
+  "fixture_path": "eval/agent_phase1_cli_demo_cases_2026-10-05.json",
+  "fixture_version": "phase1-readonly-cli-demo-v1",
+  "workspace": "eval/agent_phase1_demo_workspace_2026-10-05",
+  "model": "qwen3:4b-instruct-2507-q4_K_M",
+  "log_dir": "eval/agent_phase1_cli_run_logs_2026-10-05",
+  "cases": [
+    {
+      "case_id": "demo_01_list_root",
+      "request": "이 workspace의 최상위 항목을 목록으로 확인해줘.",
+      "expected_tools": [
+        "list_files"
+      ],
+      "actual_tools": [],
+      "returncode": 1,
+      "stdout": "{\n  \"run_id\": \"20261005T143949Z-67617bfb\",\n  \"started_at\": \"2026-10-05T14:39:49+00:00\",\n  \"ended_at\": \"2026-10-05T14:39:49+00:00\",\n  \"status\": \"ollama_error\",\n  \"failure_reason\": \"로컬 Ollama 서버에 연결하지 못했거나 시간이 초과됐습니다\",\n  \"workspace\": \"<repo>/eval/agent_phase1_demo_workspace_2026-10-05\",\n  \"question\": \"이 workspace의 최상위 항목을 목록으로 확인해줘.\",\n  \"model_metadata\": null,\n  \"prompt_version\": \"readonly-cli-agent-v1\",\n  \"prompt_sha256\": \"7740657277cc59b00be7ed17219eacdd1d5ad1a2cdbe5d0e605bfea584ab0a76\",\n  \"tool_contract_version\": \"readonly-cli-tools-v1\",\n  \"tools_sha256\": \"3f97c561f58487f55ea8564c73ad28df930a4330f332b72ffdc3778821ef7c1c\",\n  \"limits\": {\n    \"max_model_calls\": 4,\n    \"max_tool_calls\": 3,\n    \"total_timeout_seconds\": 180\n  },\n  \"steps\": [],\n  \"evidence\": [],\n  \"final_answer\": null,\n  \"answer_evidence_references\": [],\n  \"counts\": {\n    \"model_generation_attempts\": 0,\n    \"model_generation_responses\": 0,\n    \"tool_call_steps\": 0,\n    \"evidence_count\": 0,\n    \"prompt_tokens\": 0,\n    \"output_tokens\": 0,\n    \"elapsed_ms\": 5.646\n  },\n  \"log_path\": \"eval/agent_phase1_cli_run_logs_2026-10-05/20261005T143949Z-67617bfb.json\",\n  \"log_error\": null\n}\n",
+      "stderr": "",
+      "stdout_json_parse_error": null,
+      "record": {
+        "run_id": "20261005T143949Z-67617bfb",
+        "started_at": "2026-10-05T14:39:49+00:00",
+        "ended_at": "2026-10-05T14:39:49+00:00",
+        "status": "ollama_error",
+        "failure_reason": "로컬 Ollama 서버에 연결하지 못했거나 시간이 초과됐습니다",
+        "workspace": "<repo>/eval/agent_phase1_demo_workspace_2026-10-05",
+        "question": "이 workspace의 최상위 항목을 목록으로 확인해줘.",
+        "model_metadata": null,
+        "prompt_version": "readonly-cli-agent-v1",
+        "prompt_sha256": "7740657277cc59b00be7ed17219eacdd1d5ad1a2cdbe5d0e605bfea584ab0a76",
+        "tool_contract_version": "readonly-cli-tools-v1",
+        "tools_sha256": "3f97c561f58487f55ea8564c73ad28df930a4330f332b72ffdc3778821ef7c1c",
+        "limits": {
+          "max_model_calls": 4,
+          "max_tool_calls": 3,
+          "total_timeout_seconds": 180
+        },
+        "steps": [],
+        "evidence": [],
+        "final_answer": null,
+        "answer_evidence_references": [],
+        "counts": {
+          "model_generation_attempts": 0,
+          "model_generation_responses": 0,
+          "tool_call_steps": 0,
+          "evidence_count": 0,
+          "prompt_tokens": 0,
+          "output_tokens": 0,
+          "elapsed_ms": 5.646
+        },
+        "log_path": "eval/agent_phase1_cli_run_logs_2026-10-05/20261005T143949Z-67617bfb.json",
+        "log_error": null
+      },
+      "facts_check": {
+        "passed": false,
+        "missing": [
+          "README.md",
+          "docs",
+          "reports",
+          "settings",
+          "src"
+        ]
+      },
+      "passed": false,
+      "elapsed_ms": 64.206
+    },
+    {
+      "case_id": "demo_02_read_value",
+      "request": "settings/app.json에서 enabled 값만 알려줘.",
+      "expected_tools": [
+        "read_file"
+      ],
+      "actual_tools": [],
+      "returncode": 1,
+      "stdout": "{\n  \"run_id\": \"20261005T143949Z-b2f52f9d\",\n  \"started_at\": \"2026-10-05T14:39:49+00:00\",\n  \"ended_at\": \"2026-10-05T14:39:49+00:00\",\n  \"status\": \"ollama_error\",\n  \"failure_reason\": \"로컬 Ollama 서버에 연결하지 못했거나 시간이 초과됐습니다\",\n  \"workspace\": \"<repo>/eval/agent_phase1_demo_workspace_2026-10-05\",\n  \"question\": \"settings/app.json에서 enabled 값만 알려줘.\",\n  \"model_metadata\": null,\n  \"prompt_version\": \"readonly-cli-agent-v1\",\n  \"prompt_sha256\": \"7740657277cc59b00be7ed17219eacdd1d5ad1a2cdbe5d0e605bfea584ab0a76\",\n  \"tool_contract_version\": \"readonly-cli-tools-v1\",\n  \"tools_sha256\": \"3f97c561f58487f55ea8564c73ad28df930a4330f332b72ffdc3778821ef7c1c\",\n  \"limits\": {\n    \"max_model_calls\": 4,\n    \"max_tool_calls\": 3,\n    \"total_timeout_seconds\": 180\n  },\n  \"steps\": [],\n  \"evidence\": [],\n  \"final_answer\": null,\n  \"answer_evidence_references\": [],\n  \"counts\": {\n    \"model_generation_attempts\": 0,\n    \"model_generation_responses\": 0,\n    \"tool_call_steps\": 0,\n    \"evidence_count\": 0,\n    \"prompt_tokens\": 0,\n    \"output_tokens\": 0,\n    \"elapsed_ms\": 5.742\n  },\n  \"log_path\": \"eval/agent_phase1_cli_run_logs_2026-10-05/20261005T143949Z-b2f52f9d.json\",\n  \"log_error\": null\n}\n",
+      "stderr": "",
+      "stdout_json_parse_error": null,
+      "record": {
+        "run_id": "20261005T143949Z-b2f52f9d",
+        "started_at": "2026-10-05T14:39:49+00:00",
+        "ended_at": "2026-10-05T14:39:49+00:00",
+        "status": "ollama_error",
+        "failure_reason": "로컬 Ollama 서버에 연결하지 못했거나 시간이 초과됐습니다",
+        "workspace": "<repo>/eval/agent_phase1_demo_workspace_2026-10-05",
+        "question": "settings/app.json에서 enabled 값만 알려줘.",
+        "model_metadata": null,
+        "prompt_version": "readonly-cli-agent-v1",
+        "prompt_sha256": "7740657277cc59b00be7ed17219eacdd1d5ad1a2cdbe5d0e605bfea584ab0a76",
+        "tool_contract_version": "readonly-cli-tools-v1",
+        "tools_sha256": "3f97c561f58487f55ea8564c73ad28df930a4330f332b72ffdc3778821ef7c1c",
+        "limits": {
+          "max_model_calls": 4,
+          "max_tool_calls": 3,
+          "total_timeout_seconds": 180
+        },
+        "steps": [],
+        "evidence": [],
+        "final_answer": null,
+        "answer_evidence_references": [],
+        "counts": {
+          "model_generation_attempts": 0,
+          "model_generation_responses": 0,
+          "tool_call_steps": 0,
+          "evidence_count": 0,
+          "prompt_tokens": 0,
+          "output_tokens": 0,
+          "elapsed_ms": 5.742
+        },
+        "log_path": "eval/agent_phase1_cli_run_logs_2026-10-05/20261005T143949Z-b2f52f9d.json",
+        "log_error": null
+      },
+      "facts_check": {
+        "passed": false,
+        "missing": [
+          "enabled",
+          "false"
+        ]
+      },
+      "passed": false,
+      "elapsed_ms": 58.475
+    },
+    {
+      "case_id": "demo_03_search_file",
+      "request": "src/report.py 파일에서 CODE_RED를 찾아줘.",
+      "expected_tools": [
+        "search_text"
+      ],
+      "actual_tools": [],
+      "returncode": 1,
+      "stdout": "{\n  \"run_id\": \"20261005T143949Z-adea3c53\",\n  \"started_at\": \"2026-10-05T14:39:49+00:00\",\n  \"ended_at\": \"2026-10-05T14:39:49+00:00\",\n  \"status\": \"ollama_error\",\n  \"failure_reason\": \"로컬 Ollama 서버에 연결하지 못했거나 시간이 초과됐습니다\",\n  \"workspace\": \"<repo>/eval/agent_phase1_demo_workspace_2026-10-05\",\n  \"question\": \"src/report.py 파일에서 CODE_RED를 찾아줘.\",\n  \"model_metadata\": null,\n  \"prompt_version\": \"readonly-cli-agent-v1\",\n  \"prompt_sha256\": \"7740657277cc59b00be7ed17219eacdd1d5ad1a2cdbe5d0e605bfea584ab0a76\",\n  \"tool_contract_version\": \"readonly-cli-tools-v1\",\n  \"tools_sha256\": \"3f97c561f58487f55ea8564c73ad28df930a4330f332b72ffdc3778821ef7c1c\",\n  \"limits\": {\n    \"max_model_calls\": 4,\n    \"max_tool_calls\": 3,\n    \"total_timeout_seconds\": 180\n  },\n  \"steps\": [],\n  \"evidence\": [],\n  \"final_answer\": null,\n  \"answer_evidence_references\": [],\n  \"counts\": {\n    \"model_generation_attempts\": 0,\n    \"model_generation_responses\": 0,\n    \"tool_call_steps\": 0,\n    \"evidence_count\": 0,\n    \"prompt_tokens\": 0,\n    \"output_tokens\": 0,\n    \"elapsed_ms\": 5.071\n  },\n  \"log_path\": \"eval/agent_phase1_cli_run_logs_2026-10-05/20261005T143949Z-adea3c53.json\",\n  \"log_error\": null\n}\n",
+      "stderr": "",
+      "stdout_json_parse_error": null,
+      "record": {
+        "run_id": "20261005T143949Z-adea3c53",
+        "started_at": "2026-10-05T14:39:49+00:00",
+        "ended_at": "2026-10-05T14:39:49+00:00",
+        "status": "ollama_error",
+        "failure_reason": "로컬 Ollama 서버에 연결하지 못했거나 시간이 초과됐습니다",
+        "workspace": "<repo>/eval/agent_phase1_demo_workspace_2026-10-05",
+        "question": "src/report.py 파일에서 CODE_RED를 찾아줘.",
+        "model_metadata": null,
+        "prompt_version": "readonly-cli-agent-v1",
+        "prompt_sha256": "7740657277cc59b00be7ed17219eacdd1d5ad1a2cdbe5d0e605bfea584ab0a76",
+        "tool_contract_version": "readonly-cli-tools-v1",
+        "tools_sha256": "3f97c561f58487f55ea8564c73ad28df930a4330f332b72ffdc3778821ef7c1c",
+        "limits": {
+          "max_model_calls": 4,
+          "max_tool_calls": 3,
+          "total_timeout_seconds": 180
+        },
+        "steps": [],
+        "evidence": [],
+        "final_answer": null,
+        "answer_evidence_references": [],
+        "counts": {
+          "model_generation_attempts": 0,
+          "model_generation_responses": 0,
+          "tool_call_steps": 0,
+          "evidence_count": 0,
+          "prompt_tokens": 0,
+          "output_tokens": 0,
+          "elapsed_ms": 5.071
+        },
+        "log_path": "eval/agent_phase1_cli_run_logs_2026-10-05/20261005T143949Z-adea3c53.json",
+        "log_error": null
+      },
+      "facts_check": {
+        "passed": false,
+        "missing": [
+          "src/report.py",
+          "CODE_RED"
+        ]
+      },
+      "passed": false,
+      "elapsed_ms": 54.388
+    },
+    {
+      "case_id": "demo_04_search_no_match",
+      "request": "docs 디렉터리에서 MISSING_NEEDLE_42를 찾아줘.",
+      "expected_tools": [
+        "search_text"
+      ],
+      "actual_tools": [],
+      "returncode": 1,
+      "stdout": "{\n  \"run_id\": \"20261005T143949Z-348a936c\",\n  \"started_at\": \"2026-10-05T14:39:49+00:00\",\n  \"ended_at\": \"2026-10-05T14:39:49+00:00\",\n  \"status\": \"ollama_error\",\n  \"failure_reason\": \"로컬 Ollama 서버에 연결하지 못했거나 시간이 초과됐습니다\",\n  \"workspace\": \"<repo>/eval/agent_phase1_demo_workspace_2026-10-05\",\n  \"question\": \"docs 디렉터리에서 MISSING_NEEDLE_42를 찾아줘.\",\n  \"model_metadata\": null,\n  \"prompt_version\": \"readonly-cli-agent-v1\",\n  \"prompt_sha256\": \"7740657277cc59b00be7ed17219eacdd1d5ad1a2cdbe5d0e605bfea584ab0a76\",\n  \"tool_contract_version\": \"readonly-cli-tools-v1\",\n  \"tools_sha256\": \"3f97c561f58487f55ea8564c73ad28df930a4330f332b72ffdc3778821ef7c1c\",\n  \"limits\": {\n    \"max_model_calls\": 4,\n    \"max_tool_calls\": 3,\n    \"total_timeout_seconds\": 180\n  },\n  \"steps\": [],\n  \"evidence\": [],\n  \"final_answer\": null,\n  \"answer_evidence_references\": [],\n  \"counts\": {\n    \"model_generation_attempts\": 0,\n    \"model_generation_responses\": 0,\n    \"tool_call_steps\": 0,\n    \"evidence_count\": 0,\n    \"prompt_tokens\": 0,\n    \"output_tokens\": 0,\n    \"elapsed_ms\": 5.133\n  },\n  \"log_path\": \"eval/agent_phase1_cli_run_logs_2026-10-05/20261005T143949Z-348a936c.json\",\n  \"log_error\": null\n}\n",
+      "stderr": "",
+      "stdout_json_parse_error": null,
+      "record": {
+        "run_id": "20261005T143949Z-348a936c",
+        "started_at": "2026-10-05T14:39:49+00:00",
+        "ended_at": "2026-10-05T14:39:49+00:00",
+        "status": "ollama_error",
+        "failure_reason": "로컬 Ollama 서버에 연결하지 못했거나 시간이 초과됐습니다",
+        "workspace": "<repo>/eval/agent_phase1_demo_workspace_2026-10-05",
+        "question": "docs 디렉터리에서 MISSING_NEEDLE_42를 찾아줘.",
+        "model_metadata": null,
+        "prompt_version": "readonly-cli-agent-v1",
+        "prompt_sha256": "7740657277cc59b00be7ed17219eacdd1d5ad1a2cdbe5d0e605bfea584ab0a76",
+        "tool_contract_version": "readonly-cli-tools-v1",
+        "tools_sha256": "3f97c561f58487f55ea8564c73ad28df930a4330f332b72ffdc3778821ef7c1c",
+        "limits": {
+          "max_model_calls": 4,
+          "max_tool_calls": 3,
+          "total_timeout_seconds": 180
+        },
+        "steps": [],
+        "evidence": [],
+        "final_answer": null,
+        "answer_evidence_references": [],
+        "counts": {
+          "model_generation_attempts": 0,
+          "model_generation_responses": 0,
+          "tool_call_steps": 0,
+          "evidence_count": 0,
+          "prompt_tokens": 0,
+          "output_tokens": 0,
+          "elapsed_ms": 5.133
+        },
+        "log_path": "eval/agent_phase1_cli_run_logs_2026-10-05/20261005T143949Z-348a936c.json",
+        "log_error": null
+      },
+      "facts_check": {
+        "passed": false,
+        "missing": [
+          "MISSING_NEEDLE_42",
+          "no_match"
+        ]
+      },
+      "passed": false,
+      "elapsed_ms": 53.382
+    },
+    {
+      "case_id": "demo_05_list_then_read",
+      "request": "reports 디렉터리에 있는 보고서 파일을 확인한 다음, 그 파일을 읽고 보고서 제목을 알려줘.",
+      "expected_tools": [
+        "list_files",
+        "read_file"
+      ],
+      "actual_tools": [],
+      "returncode": 1,
+      "stdout": "{\n  \"run_id\": \"20261005T143949Z-b5d53d92\",\n  \"started_at\": \"2026-10-05T14:39:49+00:00\",\n  \"ended_at\": \"2026-10-05T14:39:49+00:00\",\n  \"status\": \"ollama_error\",\n  \"failure_reason\": \"로컬 Ollama 서버에 연결하지 못했거나 시간이 초과됐습니다\",\n  \"workspace\": \"<repo>/eval/agent_phase1_demo_workspace_2026-10-05\",\n  \"question\": \"reports 디렉터리에 있는 보고서 파일을 확인한 다음, 그 파일을 읽고 보고서 제목을 알려줘.\",\n  \"model_metadata\": null,\n  \"prompt_version\": \"readonly-cli-agent-v1\",\n  \"prompt_sha256\": \"7740657277cc59b00be7ed17219eacdd1d5ad1a2cdbe5d0e605bfea584ab0a76\",\n  \"tool_contract_version\": \"readonly-cli-tools-v1\",\n  \"tools_sha256\": \"3f97c561f58487f55ea8564c73ad28df930a4330f332b72ffdc3778821ef7c1c\",\n  \"limits\": {\n    \"max_model_calls\": 4,\n    \"max_tool_calls\": 3,\n    \"total_timeout_seconds\": 180\n  },\n  \"steps\": [],\n  \"evidence\": [],\n  \"final_answer\": null,\n  \"answer_evidence_references\": [],\n  \"counts\": {\n    \"model_generation_attempts\": 0,\n    \"model_generation_responses\": 0,\n    \"tool_call_steps\": 0,\n    \"evidence_count\": 0,\n    \"prompt_tokens\": 0,\n    \"output_tokens\": 0,\n    \"elapsed_ms\": 5.057\n  },\n  \"log_path\": \"eval/agent_phase1_cli_run_logs_2026-10-05/20261005T143949Z-b5d53d92.json\",\n  \"log_error\": null\n}\n",
+      "stderr": "",
+      "stdout_json_parse_error": null,
+      "record": {
+        "run_id": "20261005T143949Z-b5d53d92",
+        "started_at": "2026-10-05T14:39:49+00:00",
+        "ended_at": "2026-10-05T14:39:49+00:00",
+        "status": "ollama_error",
+        "failure_reason": "로컬 Ollama 서버에 연결하지 못했거나 시간이 초과됐습니다",
+        "workspace": "<repo>/eval/agent_phase1_demo_workspace_2026-10-05",
+        "question": "reports 디렉터리에 있는 보고서 파일을 확인한 다음, 그 파일을 읽고 보고서 제목을 알려줘.",
+        "model_metadata": null,
+        "prompt_version": "readonly-cli-agent-v1",
+        "prompt_sha256": "7740657277cc59b00be7ed17219eacdd1d5ad1a2cdbe5d0e605bfea584ab0a76",
+        "tool_contract_version": "readonly-cli-tools-v1",
+        "tools_sha256": "3f97c561f58487f55ea8564c73ad28df930a4330f332b72ffdc3778821ef7c1c",
+        "limits": {
+          "max_model_calls": 4,
+          "max_tool_calls": 3,
+          "total_timeout_seconds": 180
+        },
+        "steps": [],
+        "evidence": [],
+        "final_answer": null,
+        "answer_evidence_references": [],
+        "counts": {
+          "model_generation_attempts": 0,
+          "model_generation_responses": 0,
+          "tool_call_steps": 0,
+          "evidence_count": 0,
+          "prompt_tokens": 0,
+          "output_tokens": 0,
+          "elapsed_ms": 5.057
+        },
+        "log_path": "eval/agent_phase1_cli_run_logs_2026-10-05/20261005T143949Z-b5d53d92.json",
+        "log_error": null
+      },
+      "facts_check": {
+        "passed": false,
+        "missing": [
+          "reports/quarter_summary.md",
+          "Quarter Review"
+        ]
+      },
+      "passed": false,
+      "elapsed_ms": 53.423
+    },
+    {
+      "case_id": "demo_06_read_two_files",
+      "request": "docs/alpha.md와 docs/beta.md를 둘 다 읽고, 두 파일에 공통으로 등장하는 프로젝트 이름을 알려줘.",
+      "expected_tools": [
+        "read_file",
+        "read_file"
+      ],
+      "actual_tools": [],
+      "returncode": 1,
+      "stdout": "{\n  \"run_id\": \"20261005T143949Z-b31afb67\",\n  \"started_at\": \"2026-10-05T14:39:49+00:00\",\n  \"ended_at\": \"2026-10-05T14:39:49+00:00\",\n  \"status\": \"ollama_error\",\n  \"failure_reason\": \"로컬 Ollama 서버에 연결하지 못했거나 시간이 초과됐습니다\",\n  \"workspace\": \"<repo>/eval/agent_phase1_demo_workspace_2026-10-05\",\n  \"question\": \"docs/alpha.md와 docs/beta.md를 둘 다 읽고, 두 파일에 공통으로 등장하는 프로젝트 이름을 알려줘.\",\n  \"model_metadata\": null,\n  \"prompt_version\": \"readonly-cli-agent-v1\",\n  \"prompt_sha256\": \"7740657277cc59b00be7ed17219eacdd1d5ad1a2cdbe5d0e605bfea584ab0a76\",\n  \"tool_contract_version\": \"readonly-cli-tools-v1\",\n  \"tools_sha256\": \"3f97c561f58487f55ea8564c73ad28df930a4330f332b72ffdc3778821ef7c1c\",\n  \"limits\": {\n    \"max_model_calls\": 4,\n    \"max_tool_calls\": 3,\n    \"total_timeout_seconds\": 180\n  },\n  \"steps\": [],\n  \"evidence\": [],\n  \"final_answer\": null,\n  \"answer_evidence_references\": [],\n  \"counts\": {\n    \"model_generation_attempts\": 0,\n    \"model_generation_responses\": 0,\n    \"tool_call_steps\": 0,\n    \"evidence_count\": 0,\n    \"prompt_tokens\": 0,\n    \"output_tokens\": 0,\n    \"elapsed_ms\": 5.123\n  },\n  \"log_path\": \"eval/agent_phase1_cli_run_logs_2026-10-05/20261005T143949Z-b31afb67.json\",\n  \"log_error\": null\n}\n",
+      "stderr": "",
+      "stdout_json_parse_error": null,
+      "record": {
+        "run_id": "20261005T143949Z-b31afb67",
+        "started_at": "2026-10-05T14:39:49+00:00",
+        "ended_at": "2026-10-05T14:39:49+00:00",
+        "status": "ollama_error",
+        "failure_reason": "로컬 Ollama 서버에 연결하지 못했거나 시간이 초과됐습니다",
+        "workspace": "<repo>/eval/agent_phase1_demo_workspace_2026-10-05",
+        "question": "docs/alpha.md와 docs/beta.md를 둘 다 읽고, 두 파일에 공통으로 등장하는 프로젝트 이름을 알려줘.",
+        "model_metadata": null,
+        "prompt_version": "readonly-cli-agent-v1",
+        "prompt_sha256": "7740657277cc59b00be7ed17219eacdd1d5ad1a2cdbe5d0e605bfea584ab0a76",
+        "tool_contract_version": "readonly-cli-tools-v1",
+        "tools_sha256": "3f97c561f58487f55ea8564c73ad28df930a4330f332b72ffdc3778821ef7c1c",
+        "limits": {
+          "max_model_calls": 4,
+          "max_tool_calls": 3,
+          "total_timeout_seconds": 180
+        },
+        "steps": [],
+        "evidence": [],
+        "final_answer": null,
+        "answer_evidence_references": [],
+        "counts": {
+          "model_generation_attempts": 0,
+          "model_generation_responses": 0,
+          "tool_call_steps": 0,
+          "evidence_count": 0,
+          "prompt_tokens": 0,
+          "output_tokens": 0,
+          "elapsed_ms": 5.123
+        },
+        "log_path": "eval/agent_phase1_cli_run_logs_2026-10-05/20261005T143949Z-b31afb67.json",
+        "log_error": null
+      },
+      "facts_check": {
+        "passed": false,
+        "missing": [
+          "Project Helio"
+        ]
+      },
+      "passed": false,
+      "elapsed_ms": 53.189
+    }
+  ],
+  "summary": {
+    "case_count": 6,
+    "passed": 0,
+    "completed": 0,
+    "tool_sequence_matched": 0,
+    "facts_matched": 0,
+    "model_generation_attempts": 0,
+    "model_generation_responses": 0,
+    "prompt_tokens": 0,
+    "output_tokens": 0,
+    "agent_elapsed_ms": 31.772
+  }
+}

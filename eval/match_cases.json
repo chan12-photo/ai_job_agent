@@ -1,0 +1,145 @@
+{
+  "notice": "모든 요구와 근거는 평가용 가상 자료입니다. 실제 경력이나 개인정보가 아닙니다.",
+  "cases": [
+    {
+      "id": "and_both",
+      "requirement_quote": "Python과 SQL 사용 경험",
+      "candidates": ["가상 프로젝트에서 Python 자동화를 구현하고 SQL 쿼리를 작성했습니다."],
+      "expected": ["supported"],
+      "rationale": "두 기술 사용이 모두 직접 기록됨"
+    },
+    {
+      "id": "and_one",
+      "requirement_quote": "Python과 SQL 사용 경험",
+      "candidates": ["가상 프로젝트에서 Python 자동화를 구현했습니다."],
+      "expected": ["partial"],
+      "rationale": "Python만 기록되고 SQL은 미확인"
+    },
+    {
+      "id": "not_recorded_is_not_absence",
+      "requirement_quote": "Python과 SQL 실무 경험",
+      "candidates": ["Python으로 자동화를 구현했습니다. SQL 경험은 이 문서에 기록하지 않았습니다."],
+      "expected": ["partial", "insufficient_evidence"],
+      "rationale": "SQL의 실제 경험 유무와 실무 범위는 문서로 확정할 수 없음"
+    },
+    {
+      "id": "or_one",
+      "requirement_quote": "Python 또는 Java 사용 경험",
+      "candidates": ["가상 프로젝트에서 Python으로 API를 구현했습니다."],
+      "expected": ["supported"],
+      "rationale": "또는 조건의 한 가지가 직접 기록됨"
+    },
+    {
+      "id": "explicit_negative",
+      "requirement_quote": "Python 사용 경험",
+      "candidates": ["가상 프로젝트에서는 Python을 사용하지 않았습니다."],
+      "expected": ["insufficient_evidence"],
+      "rationale": "부정 문장이 긍정 사용의 증거가 아님"
+    },
+    {
+      "id": "team_not_personal",
+      "requirement_quote": "본인이 직접 비용 20% 절감",
+      "candidates": ["가상 프로젝트 팀 전체가 비용을 20% 절감했습니다. 개인별 기여는 기록하지 않았습니다."],
+      "expected": ["insufficient_evidence"],
+      "rationale": "팀 성과만 있고 본인의 직접 기여는 미확인"
+    },
+    {
+      "id": "duration_short",
+      "requirement_quote": "Python 개발 경력 3년 이상",
+      "candidates": ["가상 회사에서 Python 개발 업무를 1년 수행했습니다."],
+      "expected": ["partial"],
+      "rationale": "기술·업무는 기록되나 3년 조건은 미충족"
+    },
+    {
+      "id": "source_conflict",
+      "requirement_quote": "SQL 사용 경험",
+      "candidates": ["가상 프로젝트에서 SQL 쿼리를 작성했습니다.", "가상 프로젝트에서 SQL을 사용한 적이 없다고 기록했습니다."],
+      "expected": ["conflicting_evidence"],
+      "rationale": "동일한 가상 프로젝트의 두 기록이 충돌함"
+    },
+    {
+      "id": "duration_exact",
+      "requirement_quote": "Python 개발 경력 3년 이상",
+      "candidates": ["가상 회사에서 Python 개발 업무를 3년 2개월 수행했습니다."],
+      "expected": ["supported"],
+      "rationale": "기술·업무·기간이 직접 기록됨"
+    },
+    {
+      "id": "skill_negated",
+      "requirement_quote": "R 사용 경험",
+      "candidates": ["가상 프로젝트에서 R을 사용하지 않았습니다."],
+      "expected": ["insufficient_evidence"],
+      "rationale": "기술명이 포함돼도 부정 문장임"
+    },
+    {
+      "id": "related_not_direct",
+      "requirement_quote": "사용자 인터뷰 직접 수행",
+      "candidates": ["가상 프로젝트에서 사용자 인터뷰 결과 보고서를 검토했습니다."],
+      "expected": ["insufficient_evidence"],
+      "rationale": "보고서 검토는 인터뷰 직접 수행과 다름"
+    },
+    {
+      "id": "duty_direct",
+      "requirement_quote": "API 개발",
+      "candidates": ["가상 프로젝트에서 REST API를 직접 설계하고 개발했습니다."],
+      "expected": ["supported"],
+      "rationale": "요구 업무 수행이 직접 기록됨"
+    },
+    {
+      "id": "or_second",
+      "requirement_quote": "Python 또는 Java 사용 경험",
+      "candidates": ["가상 프로젝트에서 Java로 서버를 구현했습니다."],
+      "expected": ["supported"],
+      "rationale": "또는 조건의 두 번째 항목이 직접 기록됨"
+    },
+    {
+      "id": "or_neither",
+      "requirement_quote": "Python 또는 Java 사용 경험",
+      "candidates": ["가상 프로젝트에서 C++ 코드를 작성했습니다."],
+      "expected": ["insufficient_evidence"],
+      "rationale": "두 기술 중 어느 것도 기록되지 않음"
+    },
+    {
+      "id": "personal_vs_team",
+      "requirement_quote": "본인이 직접 사용자 인터뷰 수행",
+      "candidates": ["가상 프로젝트 팀에서 사용자 인터뷰를 수행했습니다. 개인별 담당 업무는 기록하지 않았습니다."],
+      "expected": ["insufficient_evidence"],
+      "rationale": "팀 활동을 개인 직접 수행으로 바꿀 수 없음"
+    },
+    {
+      "id": "duration_unrelated",
+      "requirement_quote": "Python 개발 경력 3년 이상",
+      "candidates": ["가상 회사에서 3년 근무했고 Python 온라인 강의를 수강했습니다."],
+      "expected": ["insufficient_evidence"],
+      "rationale": "근무 기간과 Python 개발 기간은 같다고 할 수 없음"
+    },
+    {
+      "id": "and_three_two",
+      "requirement_quote": "Python과 SQL 및 Tableau 사용 경험",
+      "candidates": ["가상 프로젝트에서 Python과 SQL을 사용했습니다."],
+      "expected": ["partial"],
+      "rationale": "세 항목 중 두 항목만 직접 기록됨"
+    },
+    {
+      "id": "two_sources_support",
+      "requirement_quote": "Python과 SQL 사용 경험",
+      "candidates": ["가상 프로젝트 A에서 Python으로 자동화했습니다.", "가상 프로젝트 B에서 SQL 쿼리를 작성했습니다."],
+      "expected": ["supported"],
+      "rationale": "두 근거를 합치면 AND 조건이 모두 직접 기록됨"
+    },
+    {
+      "id": "quantified_team_only",
+      "requirement_quote": "본인이 직접 처리 시간을 30% 단축",
+      "candidates": ["가상 프로젝트 팀 전체의 처리 시간이 30% 단축됐습니다."],
+      "expected": ["insufficient_evidence"],
+      "rationale": "팀 수치를 개인 기여 수치로 바꿀 수 없음"
+    },
+    {
+      "id": "direct_research",
+      "requirement_quote": "사용자 인터뷰 직접 수행",
+      "candidates": ["가상 서비스에서 사용자 8명을 직접 인터뷰하고 질문지를 작성했습니다."],
+      "expected": ["supported"],
+      "rationale": "직접 수행이 명시됨"
+    }
+  ]
+}
