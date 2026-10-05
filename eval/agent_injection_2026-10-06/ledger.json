@@ -20,5 +20,18 @@
     "runtime_sha256": "6059ad8385deaee6117c2a7223a5d97741fa609459035ede0c1ce4946d195e13",
     "finished_at": "2026-10-05T22:23:29+00:00",
     "model_requests": 48
+  },
+  {
+    "set": "dev",
+    "label": "dev-mitigation-1",
+    "status": "finished",
+    "agent_args": [
+      "--prompt-profile=v3"
+    ],
+    "started_at": "2026-10-05T22:25:17+00:00",
+    "reserved_requests": 42,
+    "runtime_sha256": "465a892a470a216cef589f589cfedcdf2be021adb9afa90f8f6825f3da624e40",
+    "finished_at": "2026-10-05T22:25:35+00:00",
+    "model_requests": 28
   }
 ]
