@@ -59,6 +59,15 @@ def e(value):
     return escape(str(value), quote=True)
 
 
+def source_quote(value):
+    """Render an extracted field stored as a verified span {"quote", "start", "end"}."""
+    if isinstance(value, dict) and value.get("quote"):
+        return f"{value['quote']} [{value.get('start')}:{value.get('end')}]"
+    if isinstance(value, str) and value:
+        return value
+    return "미확인"
+
+
 def deadline_label(row):
     if row["deadline_date"]:
         return f"{row['deadline_date']} · 날짜만 확인, 시각 미확인"
@@ -824,9 +833,9 @@ class WebHandler(BaseHTTPRequestHandler):
             extracted = analysis["input_snapshot"].get("extracted")
             if extracted:
                 parts.append('<section class="card"><h2>공고에서 추출한 정보 · AI 초안</h2>'
-                             f'<p>회사: {e(extracted.get("company") or "미확인")} · '
-                             f'직무: {e(extracted.get("position") or "미확인")}</p>'
-                             f'<p>마감 원문: {e(extracted.get("deadline_raw") or "미확인")}</p>'
+                             f'<p>회사: {e(source_quote(extracted.get("company")))} · '
+                             f'직무: {e(source_quote(extracted.get("position")))}</p>'
+                             f'<p>마감 원문: {e(source_quote(extracted.get("deadline_raw")))}</p>'
                              '<p class="muted">아래 요구 문구와 함께 공고 원문에 대조해 주세요.</p></section>')
             if analysis["previous_version_ids"]:
                 parts.append('<div class="warning">분석 당시 문서 버전 중 현재 비활성화된 버전: '

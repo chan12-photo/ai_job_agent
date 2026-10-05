@@ -136,6 +136,11 @@ class WebTests(unittest.TestCase):
         self.assertIn("Python을 사용했습니다", body)
         self.assertIn("SQL을 사용하지 않았습니다", body)
         self.assertIn("match-v5", body)
+        # Extracted fields are stored as verified source spans, not plain strings.
+        company_start = SYNTHETIC_JOB.index("가상회사")
+        self.assertIn(f"회사: 가상회사 [{company_start}:{company_start + 4}]", body)
+        self.assertNotIn("&#x27;quote&#x27;", body)
+        self.assertNotIn("'quote'", body)
 
         status, _, _ = self.post(f"/analyses/{analysis_id}/review", {
             "revision": "0", "review_status": "needs_changes"})
