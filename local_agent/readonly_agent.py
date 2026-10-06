@@ -43,7 +43,7 @@ MAX_LIST_ENTRIES = 200
 DEFAULT_MAX_MODEL_CALLS = 4
 DEFAULT_MAX_TOOL_CALLS = 3
 DEFAULT_TOTAL_TIMEOUT_SECONDS = 180
-DEFAULT_LOG_DIR = Path.home() / "Library" / "Application Support" / "AIJobAgent" / "agent_runs"
+DEFAULT_LOG_DIR = Path.home() / "Library" / "Application Support" / "LocalAgentLab" / "runs"
 
 EXCLUDED_NAMES = {".git", "__pycache__", ".pytest_cache", ".venv", "node_modules"}
 EXCLUDED_PATTERNS = {

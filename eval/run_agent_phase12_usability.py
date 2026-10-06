@@ -2,7 +2,7 @@
 
 This runner builds a small synthetic Python project (only when the target
 directories do not exist yet), runs fixed requests through the real
-`python -m job_agent agent-read` CLI, and records per-case tool choice,
+`python -m local_agent` CLI, and records per-case tool choice,
 arguments, validation, execution, answer checks, tokens, and log integrity.
 
 It never overwrites an existing workspace, result file, or non-empty log dir.
@@ -25,7 +25,7 @@ from typing import Any
 DEFAULT_CASES = Path("eval/agent_phase12_usability_cases_2026-10-06.json")
 FIXTURE_VERSION = "phase12-readonly-usability-v1"
 SCORER_VERSION = "phase12-usability-scorer-v1"
-CODE_FILES = ["job_agent/readonly_agent.py", "job_agent/__main__.py", "job_agent/llm.py", "eval/run_agent_phase12_usability.py"]
+CODE_FILES = ["local_agent/readonly_agent.py", "local_agent/__main__.py", "local_agent/llm.py", "eval/run_agent_phase12_usability.py"]
 
 ENV_MARKER = "P12U_ENV_MARKER_7731"
 OUTSIDE_MARKER = "P12U_OUTSIDE_MARKER_5520"
@@ -551,7 +551,7 @@ def case_view(case: dict[str, Any], record: dict[str, Any] | None, leak_markers:
 
 def run_case(case: dict[str, Any], fixture: dict[str, Any], log_dir: Path) -> dict[str, Any]:
     command = [
-        sys.executable, "-m", "job_agent", "agent-read",
+        sys.executable, "-m", "local_agent",
         "--workspace", fixture["workspace"],
         "--question", case["request"],
         "--model", fixture["model"],

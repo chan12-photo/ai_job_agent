@@ -4,20 +4,9 @@
 >
 > **재구성한 기록입니다.** 이 저장소는 2026-10-06 이전에 커밋이 없었습니다. 아래 표는 각 단계 당시 작성된 `eval/`의 날짜별 보고서와 결과 파일로 재구성했으며, 모든 행은 원본 증거로 연결됩니다. 숫자는 해당 보고서에서 그대로 옮겼고, 작은 합성 집합은 일반 성능이 아니라 회귀 확인입니다.
 
-## Part 1 — Evidence-grounded job posting analysis / 근거 기반 채용공고 분석
+The job posting analysis part of this history (2026-09-29 to 2026-10-01) moved with that tool to [job-posting-analyzer](https://github.com/chan12-photo/job-posting-analyzer/blob/main/docs/TIMELINE.md). 채용공고 분석 부분의 기록은 그 저장소로 옮겼습니다.
 
-| 날짜 | 단계 | 한 일 | 핵심 결과 | 증거 |
-|---|---|---|---|---|
-| 2026-09-29 | Phase 0 | 요구사항·위험·아키텍처 설계 검토안 | 구현 전 설계. 현재 구현과 다를 수 있는 역사적 문서 | [Phase 0](../AI_Job_Agent_Phase0_2026-09-29.md) |
-| 2026-09-29 | Phase 2 | 검토한 문서의 키워드 검색 기준선 | 가상 질의 Recall@5 6/6. "R을 사용하지 않았습니다"가 검색되는 등 검색 결과 ≠ 자격 증거임을 기록 | [eval/README](../eval/README.md) |
-| 2026-09-29 | Phase 3 | 로컬 모델 JD 추출 (1.7B vs 4B) | 4B 형식·원문 인용 4/4지만 의미 정확 3/4. 1.7B는 원문에 없는 연도를 만들어 거부됨 | [phase3_results.json](../eval/phase3_results.json) |
-| 2026-09-29 | Phase 4 M1 | JD 추출 → 근거 검색 → 요구별 판정 전체 흐름 | 형식 통과에도 "기록 없음 → 부재로 간주" 과장 발견 | [eval/README](../eval/README.md) |
-| 2026-09-30 | match-v3→v5 | 자유 서술 제거, 출력 계약 강화 | 4B `match-v5` 20건: 구조 20/20, 기대 판정 18/20. 같은 계약에서 1.7B는 5/20 | [v5 4B](../eval/phase4_match_v5_results.json), [v5 1.7B](../eval/phase4_match_v5_1p7b_results.json) |
-| 2026-09-30 | 전체 흐름 20건 | 사례별 임시 DB에서 전 구간 실행 | 요구별 판정 16/20, 근거 Recall@5 21/21. 단독 18/20과의 차이를 입력 감사로 추적 | [workflow 20](../eval/phase4_workflow_20_results.json) |
-| 2026-09-30 | 별도 8건 | 오류 유형을 본 뒤 만든 확인 사례 | `match-v5` 5/8. 개발 중 본 사례이므로 눈가림 평가가 아님을 명시 | [holdout v5](../eval/phase4_match_holdout_v5_results.json) |
-| 2026-10-01 | OCR 입력 | macOS Vision OCR + 원본 대조 후 등록 화면 | 가상 이미지에서 오독 유형과 검증 범위 기록 | [ocr_ui](../eval/ocr_ui_2026-10-01.md) |
-
-## Part 2 — Bounded read-only workspace agent / 경계가 있는 읽기 전용 Agent
+## Read-only workspace agent / 경계가 있는 읽기 전용 Agent
 
 | 날짜 | 단계 | 한 일 | 핵심 결과 | 증거 |
 |---|---|---|---|---|

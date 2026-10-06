@@ -15,7 +15,7 @@ from typing import Any
 
 DEFAULT_CASES = Path("eval/agent_phase1_cli_demo_cases_2026-10-05.json")
 SCORER_VERSION = "phase1-demo-scorer-v3"
-CODE_FILES = ["job_agent/readonly_agent.py", "job_agent/__main__.py", "job_agent/llm.py", "eval/run_agent_phase1_cli_demo.py"]
+CODE_FILES = ["local_agent/readonly_agent.py", "local_agent/__main__.py", "local_agent/llm.py", "eval/run_agent_phase1_cli_demo.py"]
 
 
 def code_manifest() -> dict[str, str | None]:
@@ -171,8 +171,7 @@ def run_case(case: dict[str, Any], fixture: dict[str, Any], log_dir: Path) -> di
     command = [
         sys.executable,
         "-m",
-        "job_agent",
-        "agent-read",
+        "local_agent",
         "--workspace",
         fixture["workspace"],
         "--question",

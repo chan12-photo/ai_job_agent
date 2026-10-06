@@ -161,10 +161,10 @@ v2 실행의 초기 JSON 형식은 **20/20 통과**했다. 그러나 JSON 안의
 
 ## 평가 산출물
 
-- [평가 실행기](<repo>/eval/run_agent_phase05.py)
-- [최종 20건 원시 기록](<repo>/eval/agent_phase05_results_2026-10-01_v2.json)
-- [첫 실행 원시 기록](<repo>/eval/agent_phase05_results_2026-10-01_v1.json)
-- [별도 평가 DB](<repo>/eval/agent_phase05_eval_2026-10-01_v2.sqlite3)
+- [평가 실행기](run_agent_phase05.py)
+- [최종 20건 원시 기록](agent_phase05_results_2026-10-01_v2.json)
+- [첫 실행 원시 기록](agent_phase05_results_2026-10-01_v1.json)
+- `agent_phase05_eval_2026-10-01_v2.sqlite3` (local SQLite trace, not published)
 
 기존 제품 파일, 기본 SQLite, OCR 이미지, 실제 사용자 자료는 평가에 사용하지 않았다. 기존 전체 테스트는 **52건 통과**했지만, 이는 기존 제품 회귀 검증 결과이며 Agent 성능 점수가 아니다.
 

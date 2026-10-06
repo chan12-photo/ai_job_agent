@@ -1,43 +1,23 @@
-# AI Job Agent — local LLM tools that have to show their evidence
+# Local Agent Lab — a local model agent that has to show its evidence
 
 **English** · [한국어](README.ko.md)
 
-Small local language models answer confidently whether or not they are right. This project builds two local-first tools around one rule: **a model's answer only counts if it points to evidence, and "the run finished" is never treated as "the answer is correct".**
+A read-only agent that answers questions about a local folder with three tools (`list_files`, `read_file`, `search_text`) and a local Ollama model. Every tool call is checked against a path policy before anything is opened, every run is logged and can be replayed, and every change to the agent is measured with fixed, partly pre-registered evaluations. No paid API, no cloud fallback.
 
-1. **Evidence-grounded job posting analysis** — extract requirements from a job posting (text or screenshot), retrieve passages from the user's own reviewed documents, and give a per-requirement verdict that must cite the exact source span.
-2. **A bounded read-only workspace agent** — answers questions about a local folder with three tools (`list_files`, `read_file`, `search_text`), behind a path policy that is checked before any file is opened.
-
-Everything runs on a Mac with a local Ollama model (`qwen3:4b-instruct`, 4-bit). No paid API, no cloud fallback.
+**Where it stands.** With the current 4B model (`qwen3:4b-instruct`, 4-bit), the agent fully answers about 7 in 10 simple single-file questions (17/24 on the sealed injection test set at baseline, 10/12 in the usability test). That makes it a measurement and safety platform, not yet a daily-use tool. The next step is to compare larger free local models, such as `gpt-oss:20b` and `devstral-small-2:24b`, on the same evaluations.
 
 ## What the evaluations found
 
 - **Ollama silently drops chat history when it exceeds the context window.** With the default request, a 4,772-token conversation was cut to 3,542 tokens without an error; the message holding the question vanished and the model answered `UNKNOWN` with `done_reason=stop`. The agent now sends `truncate=false`, so an overflow becomes an explicit `context_budget_exceeded` that keeps the evidence already read. → [follow-up report](eval/agent_phase12_followup_report_2026-10-06.md)
-- **Passing a format check is not being right.** Under an identical output contract, the 4B model reached the expected verdict in 18/20 matching cases and the 1.7B model in 5/20, although both produced well-formed, correctly cited output 20/20. → [evaluation index](docs/EVALUATION.md)
-- **The policy layer holds even when the model does not.** In a 12-request usability test on a synthetic Python project, requests for a `.ENV` file and for a symlink pointing outside the workspace were rejected before any file was opened, with zero leaks of planted markers. The same run scored 10/12 overall: the model also obeyed an instruction hidden in a file. That failure is kept as a replayable demo, not hidden. → [usability report](eval/agent_phase12_usability_report_2026-10-06.md)
-- **A pre-registered prompt-injection evaluation, reported as it came out.** The cases, scorer, and decision rule were pushed to GitHub before any model run. The model rarely obeyed planted instructions and never attempted a hijacked tool call (sealed test set: 1/18 attack success by the registered measure). A mitigation that labels tool results as untrusted and restates the user's question met the registered rule (0/18), but the difference is one case, and it plausibly caused a new failure (answering before reading a file), so it is not the default. The registered detector also missed the model's main way of complying; that is reported, not re-scored. → [injection report](eval/agent_injection_2026-10-06/REPORT.md)
-
-## Screenshots
-
-<img src="docs/images/web-analysis.png" alt="Saved analysis page: per-requirement model verdicts, each with the exact source span it cited" width="720">
-
-A saved analysis of a synthetic posting, run on the local 4B model. Each requirement shows the model's proposed verdict next to the exact passage it cited, and the page states up front that verdicts are drafts. Look at **r3**: the model proposed `partial` for "Tableau dashboard building", but the cited passage says dashboards were only viewed, never built. That is a model error, kept in the screenshot on purpose: showing the source is what lets a reviewer catch it. Human review is stored separately from the model's verdict and never changes the application status.
-
-<details>
-<summary>Job posting detail page</summary>
-
-<img src="docs/images/web-job-detail.png" alt="Job posting detail: original text, human-entered application record, and saved analyses" width="720">
-
-The original posting text, the application record that only a person edits, and the saved AI analyses as separate sections. Analysis runs only when the user presses the button.
-</details>
-
-All data in the screenshots is synthetic.
+- **The policy layer holds even when the model does not.** In a 12-request usability test on a synthetic Python project, requests for a `.ENV` file and for a symlink pointing outside the workspace were rejected before any file was opened, with zero leaks of planted markers. The same run scored 10/12 overall, and one failure — the model obeyed an instruction hidden in a file — is kept as a replayable demo. → [usability report](eval/agent_phase12_usability_report_2026-10-06.md)
+- **A pre-registered prompt-injection evaluation, reported as it came out.** The cases, scorer, and decision rule were pushed to GitHub before any model run. The model rarely obeyed planted instructions and never attempted a hijacked tool call (sealed test set: 1/18 attack success by the registered measure). A mitigation that labels tool results as untrusted and restates the user's question met the registered rule (0/18), but the difference is one case and it plausibly caused a new failure (answering before reading a file), so it is not the default. The registered detector also missed the model's main way of complying; that is reported, not re-scored. → [injection report](eval/agent_injection_2026-10-06/REPORT.md)
 
 ## Try it in one minute (no model needed)
 
-The agent demo replays model responses recorded from real runs, while the actual policy checks and tools execute against a committed synthetic workspace. If the code, prompt, tools, or files change the conversation in any way, the replay stops with `replay_mismatch` instead of inventing a turn.
+The demo replays model responses recorded from real runs, while the actual policy checks and tools execute against a committed synthetic workspace. If the code, prompt, tools, or files change the conversation in any way, the replay stops with `replay_mismatch` instead of inventing a turn.
 
 ```bash
-git clone https://github.com/chan12-photo/ai_job_agent.git && cd ai_job_agent
+git clone https://github.com/chan12-photo/local-agent-lab.git && cd local-agent-lab
 python3 scripts/run_demo.py
 ```
 
@@ -56,67 +36,64 @@ python3 scripts/run_demo.py
 6/6 recorded runs reproduced without calling a model.
 ```
 
-Run a single replay with the full CLI output, or the whole test suite (Python 3.10+, standard library only):
+Run one replay with the full CLI output, or the test suite (Python 3.10+, standard library only):
 
 ```bash
-python3 -m job_agent agent-read --replay demo/replays/06_context_overflow_rejected.json --log-dir /tmp/agent-demo-logs
+python3 -m local_agent --replay demo/replays/06_context_overflow_rejected.json --log-dir /tmp/agent-demo-logs
 python3 -m unittest discover -s tests
 ```
 
-The demo questions are in Korean because the project was built for Korean job postings.
+With Ollama and an installed model, ask a live question about any folder; see [docs/USAGE.md](docs/USAGE.md):
+
+```bash
+python3 -m local_agent --workspace path/to/project --question "Where is the retry limit configured?"
+```
+
+The demo questions are in Korean because the project was first built for Korean users.
 
 ## How it works
 
 ```mermaid
 flowchart LR
-  subgraph JOB["Job posting analysis"]
-    P["Posting text or screenshot"] -->|"macOS Vision OCR + human check"| DB[("SQLite")]
-    DB --> X["JD extraction: quotes must match the source"]
-    X --> R["Retrieval over reviewed documents"]
-    R --> V["Per-requirement verdict citing evidence IDs"]
-  end
-  subgraph AGENT["Read-only workspace agent"]
-    Q["Question"] --> M["Local model, native tool calls"]
-    M --> B{"Batch prevalidation: path policy, budget, repeats"}
-    B -->|reject| S["Stop: no file opened"]
-    B -->|pass| T["list_files / read_file / search_text"]
-    T --> M
-    M --> A["Answer citing E1, E2"]
-  end
-  O[("Local Ollama, truncate=false")] -.-> X
-  O -.-> M
+  Q["Question"] --> M["Local model via Ollama (truncate=false)"]
+  M -->|tool calls| B{"Batch prevalidation: path policy, budget, repeats"}
+  B -->|any call rejected| S["Stop: no file opened"]
+  B -->|all pass| T["list_files / read_file / search_text"]
+  T -->|"results labelled as evidence E1, E2"| M
+  M --> A["Answer citing E1, E2"]
+  M -.-> L[("Run log: every request, response, tool call, and policy decision")]
+  L -.-> R["Replay fixtures and evaluations"]
 ```
 
 Design decisions that matter most (details in the [ADR](eval/adr_readonly_workspace_agent_2026-10-06.md)):
 
 - **`completed` is an execution state, not a grade.** Every run records separately whether it finished, whether it has evidence, and, in evaluations, whether the answer is correct.
 - **All-or-nothing tool batches.** If one call in a model turn violates the policy or the budget, none of the calls in that turn run.
-- **No write, delete, shell, or Git tools — yet.** The usability test showed the model can follow instructions planted in file contents; giving it side effects before that is measured and mitigated would be the wrong order.
+- **No write, delete, shell, or Git tools — yet.** The evaluations show the model can follow instructions planted in file contents; side effects come only after that is measured and mitigated.
 - **Loud failure over silent degradation.** Context overflow, truncated generations (`done_reason=length`), incomplete searches, and log-save failures each get their own status instead of looking like success.
 
 ## Repository map
 
 | Path | Contents |
 |---|---|
-| [`job_agent/`](job_agent) | Runtime: job tracker, JD extraction, retrieval, matching, local web UI, OCR bridge, read-only agent (`readonly_agent.py`), replay client |
+| [`local_agent/`](local_agent) | The agent: policy and tools, Ollama client, run loop and logging (`readonly_agent.py`), replay client, CLI |
 | [`tests/`](tests) | Unit, regression, and replay tests; no network, synthetic data only |
-| [`eval/`](eval) | Fixtures, runners, raw results, and dated reports for every evaluation |
+| [`eval/`](eval) | Fixtures, runners, raw results, and dated reports for every evaluation ([index](docs/EVALUATION.md)) |
 | [`demo/`](demo) | Replay fixtures and the synthetic workspace they run against |
-| [`docs/`](docs) | [Evaluation index](docs/EVALUATION.md), [development timeline](docs/TIMELINE.md), [detailed usage (Korean)](docs/USAGE.ko.md) |
+| [`docs/`](docs) | [Evaluation index](docs/EVALUATION.md), [development timeline](docs/TIMELINE.md), [usage](docs/USAGE.md), [handoff notes](docs/HANDOFF.md) |
 | [`scripts/`](scripts) | Demo runner, public-safety scan, path redaction, replay fixture builder |
-
-To use the job tracker web UI (`python3 -m job_agent.web`) or run the agent on a live model, see the [usage guide](docs/USAGE.ko.md). Analysis needs Ollama with an installed model; OCR needs macOS.
 
 ## How this was built
 
 This project was developed with AI coding assistants (OpenAI Codex and Anthropic Claude) under my direction. My role was to define the scope and constraints, decide what not to build, run cross-model audits in which one assistant reviewed another's code and evidence, and require every claim to be reproduced before it was fixed or reported. Commits carry `Co-Authored-By` trailers. Git history starts on 2026-10-06; earlier work is reconstructed from dated reports in [docs/TIMELINE.md](docs/TIMELINE.md).
 
+The project began as a local job posting analysis tool, which now lives in its own repository, [job-posting-analyzer](https://github.com/chan12-photo/job-posting-analyzer).
+
 ## Limitations
 
-- Evaluation sets are small and synthetic (4–20 cases each). They catch regressions; they do not establish general accuracy.
+- The current 4B model is the main capability limit: it sometimes picks the wrong tool (for example searching for a whole sentence and stopping at "no match") and cannot read token-heavy files within `num_ctx=4096`.
+- Evaluation sets are small and synthetic (5–24 cases each). They catch regressions; they do not establish general accuracy.
 - The agent still sometimes appends tokens that files ask for (see the injection report). No mitigation is enabled by default.
-- The web UI and demo questions are in Korean; OCR requires macOS Vision.
-- Large files are not paged: with `num_ctx=4096`, a token-heavy file ends the run as `context_budget_exceeded`.
 - Tests and demos were run on macOS only; Linux and Windows are untested.
 
 ## License

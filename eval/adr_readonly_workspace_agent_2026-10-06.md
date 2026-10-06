@@ -25,3 +25,7 @@ Keep the existing job/OCR/analysis functions, and maintain the read-only workspa
 ## Consequences
 
 The next safe direction is more read-only usability and policy evaluation, not write/shell expansion. File modification tools require a separate design for diff generation, approval, rollback, and stronger persistence guarantees.
+
+## Update 2026-10-06: repository split
+
+The job posting analysis tool and the read-only agent were split into two repositories. This repository (`local-agent-lab`) keeps the agent, its evaluations, and the shared history; the job tool moved to `job-posting-analyzer`. The agent's package was renamed from `job_agent` to `local_agent`, and the CLI became `python -m local_agent`. The decision above (keep the agent bounded and read-only until evaluation supports more) is unchanged.

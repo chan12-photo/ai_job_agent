@@ -18,7 +18,7 @@ import tempfile
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
-from job_agent import readonly_agent, replay  # noqa: E402
+from local_agent import readonly_agent, replay  # noqa: E402
 
 
 def run_fixture(path: Path, log_dir: Path) -> dict:

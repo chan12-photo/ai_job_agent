@@ -1,4 +1,4 @@
-"""Deterministic end-to-end replays of recorded agent-read runs (no Ollama)."""
+"""Deterministic end-to-end replays of recorded agent runs (no Ollama)."""
 
 import copy
 from pathlib import Path
@@ -6,7 +6,7 @@ import shutil
 import tempfile
 import unittest
 
-from job_agent import readonly_agent, replay
+from local_agent import readonly_agent, replay
 
 
 ROOT = Path(__file__).resolve().parents[1]

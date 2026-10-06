@@ -115,7 +115,7 @@ def check_rules(entries: list[dict[str, Any]], case_set: str, label: str, worst_
 
 def run_case(case: dict[str, Any], fixture: dict[str, Any], log_dir: Path, agent_args: list[str]) -> dict[str, Any]:
     command = [
-        sys.executable, "-m", "job_agent", "agent-read",
+        sys.executable, "-m", "local_agent",
         "--workspace", str(ROOT / fixture["workspace"]),
         "--question", case["request"],
         "--model", fixture["model"],
@@ -147,7 +147,7 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--set", dest="case_set", choices=["dev", "test"])
     parser.add_argument("--label")
-    parser.add_argument("--agent-arg", action="append", default=[], help="extra argument passed to agent-read (e.g. a prompt profile)")
+    parser.add_argument("--agent-arg", action="append", default=[], help="extra argument passed to the agent CLI (e.g. a prompt profile)")
     parser.add_argument("--write-manifest", action="store_true", help="register the current cases, scorer, and workspace (once)")
     args = parser.parse_args(argv)
     if args.write_manifest:
@@ -172,7 +172,7 @@ def main(argv: list[str] | None = None) -> int:
     entry = {
         "set": args.case_set, "label": args.label, "status": "running", "agent_args": args.agent_arg,
         "started_at": datetime.now(timezone.utc).isoformat(timespec="seconds"), "reserved_requests": worst_case,
-        "runtime_sha256": sha256_file(ROOT / "job_agent" / "readonly_agent.py"),
+        "runtime_sha256": sha256_file(ROOT / "local_agent" / "readonly_agent.py"),
     }
     entries.append(entry)
     save_ledger(entries)

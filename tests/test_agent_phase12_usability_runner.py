@@ -7,7 +7,7 @@ from pathlib import Path
 import tempfile
 import unittest
 
-from job_agent import llm, readonly_agent
+from local_agent import llm, readonly_agent
 
 
 ROOT = Path(__file__).resolve().parents[1]

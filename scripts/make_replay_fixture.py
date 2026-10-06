@@ -1,4 +1,4 @@
-"""Build a replay fixture from a recorded agent-read run log.
+"""Build a replay fixture from a recorded agent run log.
 
 The fixture keeps, per model turn, the exact request messages and the server
 response (or the recorded error), plus the recorded outcome for comparison.
@@ -19,7 +19,7 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
-from job_agent import replay  # noqa: E402
+from local_agent import replay  # noqa: E402
 
 spec = importlib.util.spec_from_file_location("check_public_safety", ROOT / "scripts" / "check_public_safety.py")
 safety = importlib.util.module_from_spec(spec)

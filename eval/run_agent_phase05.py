@@ -17,7 +17,7 @@ import subprocess
 import tempfile
 from typing import Any
 
-from job_agent import llm
+from local_agent import llm
 
 
 MODEL = "qwen3:4b-instruct-2507-q4_K_M"

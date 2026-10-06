@@ -1,4 +1,6 @@
-# AI Job Agent handoff — Phase 1.2 read-only Agent stabilization
+# Handoff notes — read-only local agent
+
+> **Development handoff notes.** Written during development so that another AI assistant could continue the work. Earlier sections describe the combined repository before the 2026-10-06 split; the job posting analysis tool now lives in `job-posting-analyzer`, and the package here is `local_agent` (CLI: `python -m local_agent`).
 
 ## Current goal
 
@@ -89,3 +91,10 @@ Read `HANDOFF.md`, `eval/agent_phase1_2_report_2026-10-06.md`, the current diff,
 - Stage 3: pre-registered indirect prompt injection evaluation in `eval/agent_injection_2026-10-06/` (PREREGISTRATION.md pushed before any run, REPORT.md with results). Test attack success 1/18 → 0/18 with profile v4; the registered rule is met on one case, with one plausible new failure (answering before reading after `list_files`), so the default profile stays `v2`. The registered canary detector missed spaced echoes; this is documented, not re-scored. 179 of 250 model requests used. The sealed test set is spent; a new mitigation needs a new sealed set.
 - `agent-read --prompt-profile {v2,v3,v4}`; replays use the profile recorded in their fixture.
 - Next candidates: a non-pushy tool-result reminder plus a detector that counts spaced canaries, under a new pre-registration; the natural-language search-query failure (separately).
+
+## Update 2026-10-06 — repository split and rename
+
+- This repository is now agent-only (`local-agent-lab`); the job posting analysis tool, its tests, evaluations, screenshots, and the Phase 0 design document moved to the separate repository `job-posting-analyzer` (commit `504b2b8` there).
+- Package `job_agent` → `local_agent`; CLI `python -m job_agent agent-read` → `python -m local_agent`. Default log folder: `~/Library/Application Support/LocalAgentLab/runs`.
+- Pre-registered injection files were not moved, so their registration hashes still verify.
+- Next: compare `gpt-oss:20b` and `devstral-small-2:24b` (free, Apache 2.0, ~14–15 GB) against the 4B baseline on the existing evaluations, after the user approves the downloads.

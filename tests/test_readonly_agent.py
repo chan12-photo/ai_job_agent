@@ -10,7 +10,7 @@ import unittest
 from unittest import mock
 import urllib.error
 
-from job_agent import llm, readonly_agent
+from local_agent import llm, readonly_agent
 
 
 def tool_message(name, arguments):

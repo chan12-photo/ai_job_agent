@@ -9,20 +9,9 @@ Every number below is copied from the linked report or raw result file. The sets
 - "Held-out" sets here were written after the author saw earlier error types. None of them is a blind test.
 - Model: `qwen3:4b-instruct-2507-q4_K_M` unless noted, Ollama 0.34.4, `temperature=0`, `num_ctx=4096`, `num_predict=768`, `think=false`, Apple M5 Pro.
 
-## Part 1 — Evidence-grounded job posting analysis
+Evaluations of the job posting analysis tool that this project started from moved with it to [job-posting-analyzer](https://github.com/chan12-photo/job-posting-analyzer/blob/main/docs/EVALUATION.md).
 
-| Evaluation | What it measures | n | Result | Caveat | Evidence |
-|---|---|---:|---|---|---|
-| Keyword search baseline | Recall@5 of the expected paragraph | 8 queries | 6/6 queries with expected evidence found; 2 no-evidence queries returned nothing | A negated sentence ("did not use R") is still retrieved, so retrieval is not proof of a qualification | [eval/README](../eval/README.md) |
-| JD extraction, 2 models | Structure and quote check, then field accuracy | 4 postings | 4B: structure 4/4, each field 3/4. 1.7B: structure 3/4 (invented a year that is not in the text) | Passing the quote check did not prevent wrong company/role picks | [phase3_results.json](../eval/phase3_results.json) |
-| JD extraction, 20 postings | Same, larger set | 20 | `jd-extract-v3`: structure 20/20, role 20/20, company 19/20. Current `jd-extract-v5` with omission checks: 18/20 across fields | v5 trades two rejections for stricter duty/marker checks | [v3](../eval/phase4_jd_20_v3_results.json), [current](../eval/phase4_jd_20_current_results.json) |
-| Requirement matching, contract iterations | Structure/ID validity vs expected verdict | 12 → 20 | v3: 7/12 structure, 5/12 verdict. v4: 12/12, 9/12. **v5: 20/20, 18/20** | Expected verdicts and reasons were written before running | [v3](../eval/phase4_match_v3_results.json), [v4](../eval/phase4_match_v4_results.json), [v5](../eval/phase4_match_v5_results.json) |
-| Same contract, smaller model | Model size effect under an identical contract | 20 | 1.7B: structure 20/20, **verdict 5/20**, including 3 wrong `supported` verdicts | Shows why structure checks alone are not quality | [v5 1.7B](../eval/phase4_match_v5_1p7b_results.json) |
-| Additional 8 matching cases | Generalization beyond the 20 | 8 | `match-v5` 5/8; with an extra instruction 7/8 (but 17/20 on the original 20) | Written after seeing the error types; not blind | [v5](../eval/phase4_match_holdout_v5_results.json), [v7 trial](../eval/phase4_match_holdout_v7_trial_results.json) |
-| Full workflow, 20 cases | JD extraction → retrieval → per-requirement verdict, each in a fresh DB | 20 | JD 20/20, Recall@5 21/21, **verdict 16/20**; application status untouched 20/20 | The 18/20 vs 16/20 gap was traced case by case in an input audit | [workflow](../eval/phase4_workflow_20_results.json), [repeat](../eval/phase4_workflow_20_repeat_results.json) |
-| Image posting input (OCR) | macOS Vision OCR plus human comparison before saving | synthetic images | Misreadings recorded by type; nothing is saved without an explicit "compared with the original" check | Qualitative; no accuracy number is claimed | [ocr_ui](../eval/ocr_ui_2026-10-01.md) |
-
-## Part 2 — Bounded read-only workspace agent
+## Read-only workspace agent
 
 | Evaluation | What it measures | n | Result | Caveat | Evidence |
 |---|---|---:|---|---|---|

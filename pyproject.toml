@@ -3,15 +3,13 @@ requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "ai-job-agent"
+name = "local-agent-lab"
 version = "0.1.0"
-description = "Local-first LLM tools that must cite their evidence: job posting analysis and a bounded read-only workspace agent, with an evaluation harness"
+description = "A read-only local model agent whose every action is policy-checked, logged, replayable, and evaluated"
 requires-python = ">=3.10"
 license = {text = "MIT"}
 dependencies = []
 
 [tool.setuptools.packages.find]
-include = ["job_agent*"]
+include = ["local_agent*"]
 
-[tool.setuptools.package-data]
-job_agent = ["*.swift", "*.js"]

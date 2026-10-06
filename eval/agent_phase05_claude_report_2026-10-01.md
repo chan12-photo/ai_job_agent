@@ -11,7 +11,7 @@
 - 모델 호출 상한: 사례당 최초 도구 선택 1회와 도구 결과 후 최종 답변 1회.
 - 총 20개 고정 요청. 마지막 사례에서 평가기가 Ollama 프로세스를 실제로 중단한 뒤 연결 실패를 기록하고 프로세스를 정리했다.
 
-실제 프로젝트 파일, 제품 SQLite, OCR 이미지, 개인정보는 읽지 않았다. 매 실행마다 임시 합성 workspace를 만들었고, 별도 평가 SQLite에 20개 행을 저장했다. 원시 요청·응답은 [평가 JSON](<repo>/eval/agent_phase05_claude_results_2026-10-01_v2.json)에, 행 단위 보존 기록은 [평가 DB](<repo>/eval/agent_phase05_claude_eval_2026-10-01_v2.sqlite3)에 있다. 실행기는 [run_agent_phase05_claude.py](<repo>/eval/run_agent_phase05_claude.py)다.
+실제 프로젝트 파일, 제품 SQLite, OCR 이미지, 개인정보는 읽지 않았다. 매 실행마다 임시 합성 workspace를 만들었고, 별도 평가 SQLite에 20개 행을 저장했다. 원시 요청·응답은 [평가 JSON](agent_phase05_claude_results_2026-10-01_v2.json)에, 행 단위 보존 기록은 `agent_phase05_claude_eval_2026-10-01_v2.sqlite3` (local SQLite trace, not published)에 있다. 실행기는 [run_agent_phase05_claude.py](run_agent_phase05_claude.py)다.
 
 ## 전체 결과
 

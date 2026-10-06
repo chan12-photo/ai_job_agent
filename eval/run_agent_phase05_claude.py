@@ -23,7 +23,7 @@ from typing import Any
 import urllib.error
 import urllib.request
 
-from job_agent import llm
+from local_agent import llm
 
 
 MODEL = "qwen3:4b-instruct-2507-q4_K_M"
