@@ -71,3 +71,7 @@ python3 eval/run_agent_injection_eval.py --set dev --label <new-label> --agent-a
 ```
 
 The ledger already holds the registered test runs, so the runner refuses further test-set runs in this registration.
+
+## Record-keeping note: two workspace files missing from the registration commit
+
+A broad `data/` rule in `.gitignore` excluded `eval/agent_injection_workspace_2026-10-06/data/rates.csv` (case t14) and `data/regions_dev.csv` (case d10), so they were not in the pre-registration commit `cf141cb`, nor in the later result commits. Every run used them from the working tree, and the manifest's `workspace_tree` hash was computed over them before any run. They were committed unchanged afterwards; a fresh clone now reproduces all five registered hashes, including `workspace_tree`, so the published files are byte-for-byte the ones that were registered and used. The omission was found by a fresh-clone check that should have been run immediately after the registration commit.
