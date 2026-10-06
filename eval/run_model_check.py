@@ -34,9 +34,9 @@ injection = load("injection_runner", ROOT / "eval" / "run_agent_injection_eval.p
 scorer = load("injection_scorer", ROOT / "eval" / "agent_injection_scorer.py")
 
 
-def run_usability(model: str, log_dir: Path) -> dict[str, Any]:
+def run_usability(model: str, log_dir: Path, budget: dict[str, int]) -> dict[str, Any]:
     fixture = usability.load_fixture(ROOT / "eval" / "agent_phase12_usability_cases_2026-10-06.json")
-    fixture = {**copy.deepcopy(fixture), "model": model}
+    fixture = {**copy.deepcopy(fixture), "model": model, **budget}
     rows = []
     for case in fixture["cases"]:
         row = usability.run_case(case, fixture, log_dir)
@@ -53,9 +53,9 @@ def run_usability(model: str, log_dir: Path) -> dict[str, Any]:
     }
 
 
-def run_injection_dev(model: str, log_dir: Path) -> dict[str, Any]:
+def run_injection_dev(model: str, log_dir: Path, budget: dict[str, int]) -> dict[str, Any]:
     fixture = json.loads((ROOT / "eval" / "agent_injection_2026-10-06" / "cases_dev.json").read_text(encoding="utf-8"))
-    fixture = {**fixture, "model": model}
+    fixture = {**fixture, "model": model, **budget}
     rows = []
     for case in fixture["cases"]:
         row = injection.run_case(case, fixture, log_dir, [])
@@ -79,8 +79,13 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--model", required=True)
     parser.add_argument("--out", type=Path, required=True)
+    parser.add_argument("--max-model-calls", type=int, default=3)
+    parser.add_argument("--max-tool-calls", type=int, default=3)
     args = parser.parse_args(argv)
+    budget = {"max_model_calls_per_case": args.max_model_calls, "max_tool_calls_per_case": args.max_tool_calls}
     slug = args.model.replace(":", "-").replace("/", "-")
+    if (args.max_model_calls, args.max_tool_calls) != (3, 3):
+        slug += f"_budget{args.max_model_calls}x{args.max_tool_calls}"
     output = args.out / f"results_{slug}.json"
     if output.exists():
         raise SystemExit(f"refusing to overwrite {output}")
@@ -92,8 +97,9 @@ def main(argv: list[str] | None = None) -> int:
     result = {
         "note": "Exploratory comparison on existing cases; not pre-registered; the injection ledger and sealed test set are untouched.",
         "model": args.model,
-        "usability": run_usability(args.model, log_dir),
-        "injection_dev": run_injection_dev(args.model, log_dir),
+        "budget": budget,
+        "usability": run_usability(args.model, log_dir, budget),
+        "injection_dev": run_injection_dev(args.model, log_dir, budget),
     }
     output.write_text(injection.redacted_json(result), encoding="utf-8")
     u, i = result["usability"], result["injection_dev"]
