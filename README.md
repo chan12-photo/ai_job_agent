@@ -4,7 +4,7 @@
 
 A read-only agent that answers questions about a local folder with three tools (`list_files`, `read_file`, `search_text`) and a local Ollama model. Every tool call is checked against a path policy before anything is opened, every run is logged and can be replayed, and every change to the agent is measured with fixed, partly pre-registered evaluations. No paid API, no cloud fallback.
 
-**Where it stands.** With the current 4B model (`qwen3:4b-instruct`, 4-bit), the agent fully answers about 7 in 10 simple single-file questions (17/24 on the sealed injection test set at baseline, 10/12 in the usability test). That makes it a measurement and safety platform, not yet a daily-use tool. The next step is to compare larger free local models, such as `gpt-oss:20b` and `devstral-small-2:24b`, on the same evaluations.
+**Where it stands.** With the current 4B model (`qwen3:4b-instruct`, 4-bit), the agent fully answers about 7 in 10 simple single-file questions (17/24 on the sealed injection test set at baseline, 10/12 in the usability test). That makes it a measurement and safety platform, not yet a daily-use tool. A first check with the free 20B model `gpt-oss:20b` gave the same totals on the existing cases for different reasons: it read and answered better and ignored a planted output instruction, but followed a planted request to read an unrelated file that the path policy allows. A path policy cannot close that gap. → [model check](eval/model_check_2026-10-06/REPORT.md)
 
 ## What the evaluations found
 
